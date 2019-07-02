@@ -1,7 +1,9 @@
-#include <iostream>
+#include "pch.h"
+#include "Application.h"
 
 int main()
 {
-	std::cout << "Hello World" << std::endl;
-	std::cin.get();
+	Demo::Application* application = new Demo::Application();
+	application->Run();
+	delete application;
 }
