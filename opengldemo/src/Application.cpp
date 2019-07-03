@@ -2,19 +2,28 @@
 #include "Application.h"
 #include "Log.h"
 
-Demo::Application::Application()
+namespace Demo
 {
-	Demo::Log::Init();
-	LOG_INFO("Creating application!");
-}
+	Application::Application()
+	{
+		Log::Init();
+		LOG_INFO("Creating application");
+		window = new Window("OpenGL Demo", 640, 480);
+	}
 
-Demo::Application::~Application()
-{
-	LOG_INFO("Destroying application!");
-}
+	Application::~Application()
+	{
+		delete window;
+		LOG_INFO("Destroyed application");
+	}
 
-void Demo::Application::Run()
-{
-	LOG_INFO("Running application!");
-	std::cin.get();
+	void Application::Run()
+	{
+		LOG_INFO("Running application");
+		while (!window->ShouldClose())
+		{
+			glClear(GL_COLOR_BUFFER_BIT);
+			window->OnUpdate();
+		}
+	}
 }
