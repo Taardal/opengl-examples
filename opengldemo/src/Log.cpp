@@ -3,19 +3,19 @@
 
 namespace Demo
 {
-	void Log::SetLevel(const LogLevel logLevel)
+	void Log::SetLevel(LogLevel logLevel)
 	{
 		spdlog::set_level(GetSpdLogLevel(logLevel));
 	}
 
-	const std::string Log::GetTaggedMessage(const std::string& message, const std::string& tag, int lineNumber)
+	std::string Log::GetPrefixedMessage(const std::string& message, const std::string& tag, const std::string& functionName, int lineNumber)
 	{
 		std::stringstream ss;
-		ss << "[" << tag << ":" << lineNumber << "] " << message;
+		ss << "[" << tag << ":" << functionName << ":" << lineNumber << "] - " << message;
 		return ss.str();
 	}
 
-	spdlog::level::level_enum Log::GetSpdLogLevel(const LogLevel logLevel)
+	spdlog::level::level_enum Log::GetSpdLogLevel(LogLevel logLevel)
 	{
 		switch (logLevel)
 		{

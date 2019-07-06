@@ -1,8 +1,10 @@
 #pragma once
 
-#include "Log.h"
-#include "Event.h"
 #include "GLFW/glfw3.h"
+
+#include "events/WindowEvent.h"
+#include "events/KeyEvent.h"
+#include "events/MouseEvent.h"
 
 namespace Demo
 {	
@@ -19,15 +21,15 @@ namespace Demo
 			OnEventFn OnEvent;
 		};
 
-		std::string tag;
-		WindowData windowData;
 		GLFWwindow* glfwWindow;
+		WindowData windowData;
+		std::string tag;
 
 	public:
 		Window(const std::string& title, int width, int height);
 		~Window();
 
-		void SetEventListener(const std::function<void(Event&)>& onEvent);
+		void SetEventCallback(const std::function<void(Event&)>& onEvent);
 		void OnUpdate();
 
 	private:
@@ -36,5 +38,8 @@ namespace Demo
 		GLFWwindow* GetGlfwWindow();
 		GLFWwindow* CreateGlfwWindow();
 		void SetGlfwCallbacks();
+		void SetGlfwWindowCallbacks();
+		void SetGlfwKeyCallbacks();
+		void SetGlfwMouseCallbacks();
 	};
 }

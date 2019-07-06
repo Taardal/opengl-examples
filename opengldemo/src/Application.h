@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Log.h"
+#include "Core.h"
 #include "Window.h"
 
 namespace Demo

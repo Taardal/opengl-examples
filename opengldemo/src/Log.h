@@ -1,14 +1,15 @@
 #pragma once
 
-#include "Core.h"
 #include "spdlog/spdlog.h"
 
-#define LOG_T(tag, message, ...) Demo::Log::Trace(Demo::Log::GetTaggedMessage(message, tag, __LINE__), __VA_ARGS__)
-#define LOG_D(tag, message, ...) Demo::Log::Debug(Demo::Log::GetTaggedMessage(message, tag, __LINE__), __VA_ARGS__)
-#define LOG_I(tag, message, ...) Demo::Log::Info(Demo::Log::GetTaggedMessage(message, tag, __LINE__), __VA_ARGS__)
-#define LOG_W(tag, message, ...) Demo::Log::Warn(Demo::Log::GetTaggedMessage(message, tag, __LINE__), __VA_ARGS__)
-#define LOG_E(tag, message, ...) Demo::Log::Error(Demo::Log::GetTaggedMessage(message, tag, __LINE__), __VA_ARGS__)
-#define LOG_C(tag, message, ...) Demo::Log::Critical(Demo::Log::GetTaggedMessage(message, tag, __LINE__), __VA_ARGS__)
+#include "Core.h"
+
+#define LOG_T(tag, message, ...) Demo::Log::Trace(Demo::Log::GetPrefixedMessage(message, tag, __func__, __LINE__), __VA_ARGS__)
+#define LOG_D(tag, message, ...) Demo::Log::Debug(Demo::Log::GetPrefixedMessage(message, tag, __func__, __LINE__), __VA_ARGS__)
+#define LOG_I(tag, message, ...) Demo::Log::Info(Demo::Log::GetPrefixedMessage(message, tag, __func__, __LINE__), __VA_ARGS__)
+#define LOG_W(tag, message, ...) Demo::Log::Warn(Demo::Log::GetPrefixedMessage(message, tag, __func__, __LINE__), __VA_ARGS__)
+#define LOG_E(tag, message, ...) Demo::Log::Error(Demo::Log::GetPrefixedMessage(message, tag, __func__, __LINE__), __VA_ARGS__)
+#define LOG_C(tag, message, ...) Demo::Log::Critical(Demo::Log::GetPrefixedMessage(message, tag, __func__, __LINE__), __VA_ARGS__)
 
 namespace Demo
 {
@@ -25,8 +26,8 @@ namespace Demo
 	class Log
 	{
 	public:
-		static void SetLevel(const LogLevel logLevel);
-		const static std::string GetTaggedMessage(const std::string& message, const std::string& tag, int lineNumber);
+		static void SetLevel(LogLevel logLevel);
+		static std::string GetPrefixedMessage(const std::string& message, const std::string& tag, const std::string& functionName, int lineNumber);
 
 		template<typename... T>
 		static void Trace(const std::string& message, const T& ... args)
@@ -68,6 +69,6 @@ namespace Demo
 		Log() = default;
 		~Log() = default;
 
-		static spdlog::level::level_enum GetSpdLogLevel(const LogLevel logLevel);
+		static spdlog::level::level_enum GetSpdLogLevel(LogLevel logLevel);
 	};
 }
