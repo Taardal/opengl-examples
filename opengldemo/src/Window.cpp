@@ -4,26 +4,23 @@
 namespace Demo
 {
 	Window::Window(const std::string& title, int width, int height)
-		: windowData({ title, width, height }), logger(typeid(Window).name())
+		: windowData({ title, width, height })
 	{
-		logger.Trace("Creating");
-		Init();
-		
+		logger = std::make_unique<Logger>(typeid(Window).name());
+		logger->Trace("Creating");
+		InitGlfw();
+		glfwWindow = GetGlfwWindow();
+		glfwMakeContextCurrent(glfwWindow);
 		glfwSetWindowUserPointer(glfwWindow, &windowData);
-		glfwSetWindowCloseCallback(glfwWindow, [](GLFWwindow* window)
-		{
-			WindowData* windowData = (WindowData*) glfwGetWindowUserPointer(window);
-			WindowCloseEvent event;
-			windowData->OnEvent(event);
-		});
-		logger.Trace("Created");
+		SetGlfwCallbacks();
+		logger->Trace("Created");
 	}
 
 	Window::~Window()
 	{
-		logger.Trace("Destroying");
-		Shutdown();
-		logger.Trace("Destroyed");
+		logger->Trace("Destroying");
+		TerminateGlfw();
+		logger->Trace("Destroyed");
 	}
 
 	void Window::SetEventListener(const std::function<void(Event&)>& onEvent)
@@ -37,27 +34,29 @@ namespace Demo
 		glfwPollEvents();
 	}
 
-	void Window::Init()
+	void Window::InitGlfw()
 	{
 		if (!glfwInit())
 		{
-			logger.Critical("Could not init GLFW");
+			logger->Critical("Could not init GLFW");
 		}
-		glfwWindow = CreateGlfwWindow();
-		if (!glfwWindow)
-		{
-			Shutdown();
-			logger.Error("Could not create GLFW window");
-		}
-		glfwMakeContextCurrent(glfwWindow);
 	}
 
-	void Window::Shutdown()
+	void Window::TerminateGlfw()
 	{
-		logger.Trace("Shutting down");
 		glfwTerminate();
-		logger.Info("Terminated GLFW");
-		logger.Trace("Shut down");
+		logger->Info("Terminated GLFW");
+	}
+
+	GLFWwindow* Window::GetGlfwWindow()
+	{
+		GLFWwindow* glfwWindow = CreateGlfwWindow();
+		if (!glfwWindow)
+		{
+			logger->Critical("Could not create GLFW window");
+			TerminateGlfw();
+		}
+		return glfwWindow;
 	}
 
 	GLFWwindow* Window::CreateGlfwWindow()
@@ -65,11 +64,30 @@ namespace Demo
 		GLFWmonitor* fullscreenMonitor = NULL;
 		GLFWwindow* sharedWindow = NULL;
 		return glfwCreateWindow(
-			windowData.Width, 
-			windowData.Height, 
-			windowData.Title.c_str(), 
-			fullscreenMonitor, 
+			windowData.Width,
+			windowData.Height,
+			windowData.Title.c_str(),
+			fullscreenMonitor,
 			sharedWindow
 		);
 	}
+
+	void Window::SetGlfwCallbacks()
+	{
+		glfwSetWindowCloseCallback(glfwWindow, [](GLFWwindow* glfwWindow)
+		{
+			WindowData* windowData = (WindowData*)glfwGetWindowUserPointer(glfwWindow);
+			WindowCloseEvent event;
+			windowData->OnEvent(event);
+		});
+		glfwSetWindowSizeCallback(glfwWindow, [](GLFWwindow* glfwWindow, int width, int height)
+		{
+			WindowData* windowData = (WindowData*)glfwGetWindowUserPointer(glfwWindow);
+			windowData->Width = width;
+			windowData->Height = height;
+			WindowResizeEvent event(width, height);
+			windowData->OnEvent(event);
+		});
+	}
+
 }

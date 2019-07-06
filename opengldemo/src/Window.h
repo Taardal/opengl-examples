@@ -20,7 +20,7 @@ namespace Demo
 		};
 
 		WindowData windowData;
-		Logger logger;
+		std::unique_ptr<Logger> logger;
 		GLFWwindow* glfwWindow;
 
 	public:
@@ -31,8 +31,10 @@ namespace Demo
 		void OnUpdate();
 
 	private:
-		void Init();
-		void Shutdown();
+		void InitGlfw();
+		void TerminateGlfw();
+		GLFWwindow* GetGlfwWindow();
 		GLFWwindow* CreateGlfwWindow();
+		void SetGlfwCallbacks();
 	};
 }

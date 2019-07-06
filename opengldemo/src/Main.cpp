@@ -5,12 +5,12 @@
 int main()
 {
 	Demo::Logger::SetGlobalLevel(Demo::LogLevel::Trace);
-	Demo::Logger::GlobalInfo("Hello");
+	Demo::Logger::GlobalInfo("Start");
 
 	Demo::Application* application = new Demo::Application();
 	application->Run();
 	delete application;
 
-	Demo::Logger::GlobalInfo("Goodbye");
+	Demo::Logger::GlobalInfo("Finish");
 	std::cin.get();
 }

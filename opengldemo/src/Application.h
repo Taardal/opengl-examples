@@ -8,8 +8,8 @@ namespace Demo
 	class Application
 	{
 	private:
-		Window window;
-		Logger logger;
+		std::unique_ptr<Logger> logger;
+		std::unique_ptr<Window> window;
 		bool running;
 
 	public:
