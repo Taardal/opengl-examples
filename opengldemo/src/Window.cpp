@@ -1,27 +1,34 @@
 #include "pch.h"
 #include "Window.h"
-#include "Log.h"
 
 namespace Demo
 {
-	Window::Window(std::string title, int width, int height)
-		: windowData({ title, width, height })
+	Window::Window(const std::string& title, int width, int height)
+		: windowData({ title, width, height }), logger(typeid(Window).name())
 	{
-		LOG_INFO("Creating window");
+		logger.Trace("Creating");
 		Init();
 		
 		glfwSetWindowUserPointer(glfwWindow, &windowData);
 		glfwSetWindowCloseCallback(glfwWindow, [](GLFWwindow* window)
 		{
-			WindowData& windowData = *(WindowData*)glfwGetWindowUserPointer(window);
-			windowData.ShouldClose = true;
+			WindowData* windowData = (WindowData*) glfwGetWindowUserPointer(window);
+			WindowCloseEvent event;
+			windowData->OnEvent(event);
 		});
+		logger.Trace("Created");
 	}
 
 	Window::~Window()
 	{
+		logger.Trace("Destroying");
 		Shutdown();
-		LOG_INFO("Destroyed window");
+		logger.Trace("Destroyed");
+	}
+
+	void Window::SetEventListener(const std::function<void(Event&)>& onEvent)
+	{
+		windowData.OnEvent = onEvent;
 	}
 
 	void Window::OnUpdate()
@@ -30,35 +37,39 @@ namespace Demo
 		glfwPollEvents();
 	}
 
-	bool Window::ShouldClose()
-	{
-		return windowData.ShouldClose;
-	}
-
 	void Window::Init()
 	{
 		if (!glfwInit())
 		{
-			LOG_ERROR("Could not init GLFW");
+			logger.Critical("Could not init GLFW");
 		}
 		glfwWindow = CreateGlfwWindow();
 		if (!glfwWindow)
 		{
 			Shutdown();
-			LOG_ERROR("Could not create GLFW window");
+			logger.Error("Could not create GLFW window");
 		}
 		glfwMakeContextCurrent(glfwWindow);
 	}
 
 	void Window::Shutdown()
 	{
+		logger.Trace("Shutting down");
 		glfwTerminate();
+		logger.Info("Terminated GLFW");
+		logger.Trace("Shut down");
 	}
 
 	GLFWwindow* Window::CreateGlfwWindow()
 	{
 		GLFWmonitor* fullscreenMonitor = NULL;
 		GLFWwindow* sharedWindow = NULL;
-		return glfwCreateWindow(windowData.Width, windowData.Height, windowData.Title.c_str(), fullscreenMonitor, sharedWindow);
+		return glfwCreateWindow(
+			windowData.Width, 
+			windowData.Height, 
+			windowData.Title.c_str(), 
+			fullscreenMonitor, 
+			sharedWindow
+		);
 	}
 }

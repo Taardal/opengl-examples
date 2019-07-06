@@ -1,29 +1,34 @@
 #pragma once
 
+#include "Logger.h"
+#include "Event.h"
 #include "GLFW/glfw3.h"
 
 namespace Demo
-{
-	struct WindowData
-	{
-		std::string Title;
-		int Width;
-		int Height;
-		bool ShouldClose;
-	};
-
+{	
 	class Window
 	{
 	private:
-		GLFWwindow* glfwWindow;
+		using OnEventFn = std::function<void(Event&)>;
+
+		struct WindowData
+		{
+			std::string Title;
+			int Width;
+			int Height;
+			OnEventFn OnEvent;
+		};
+
 		WindowData windowData;
+		Logger logger;
+		GLFWwindow* glfwWindow;
 
 	public:
-		Window(std::string title, int width, int height);
+		Window(const std::string& title, int width, int height);
 		~Window();
 
+		void SetEventListener(const std::function<void(Event&)>& onEvent);
 		void OnUpdate();
-		bool ShouldClose();
 
 	private:
 		void Init();
