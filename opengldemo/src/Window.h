@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Logger.h"
+#include "Log.h"
 #include "Event.h"
 #include "GLFW/glfw3.h"
 
@@ -19,8 +19,8 @@ namespace Demo
 			OnEventFn OnEvent;
 		};
 
+		std::string tag;
 		WindowData windowData;
-		std::unique_ptr<Logger> logger;
 		GLFWwindow* glfwWindow;
 
 	public:

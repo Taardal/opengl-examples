@@ -4,23 +4,22 @@
 namespace Demo
 {
 	Window::Window(const std::string& title, int width, int height)
-		: windowData({ title, width, height })
+		: tag(TAG(Window)), windowData({ title, width, height })
 	{
-		logger = std::make_unique<Logger>(typeid(Window).name());
-		logger->Trace("Creating");
+		LOG_T(tag, "Creating");
 		InitGlfw();
 		glfwWindow = GetGlfwWindow();
 		glfwMakeContextCurrent(glfwWindow);
 		glfwSetWindowUserPointer(glfwWindow, &windowData);
 		SetGlfwCallbacks();
-		logger->Trace("Created");
+		LOG_T(tag, "Created");
 	}
 
 	Window::~Window()
 	{
-		logger->Trace("Destroying");
+		LOG_T(tag, "Destroying");
 		TerminateGlfw();
-		logger->Trace("Destroyed");
+		LOG_T(tag, "Destroyed");
 	}
 
 	void Window::SetEventListener(const std::function<void(Event&)>& onEvent)
@@ -38,14 +37,14 @@ namespace Demo
 	{
 		if (!glfwInit())
 		{
-			logger->Critical("Could not init GLFW");
+			LOG_C(tag, "Could not init GLFW");
 		}
 	}
 
 	void Window::TerminateGlfw()
 	{
 		glfwTerminate();
-		logger->Info("Terminated GLFW");
+		LOG_I(tag, "Terminated GLFW");
 	}
 
 	GLFWwindow* Window::GetGlfwWindow()
@@ -53,7 +52,7 @@ namespace Demo
 		GLFWwindow* glfwWindow = CreateGlfwWindow();
 		if (!glfwWindow)
 		{
-			logger->Critical("Could not create GLFW window");
+			LOG_C(tag, "Could not create GLFW window");
 			TerminateGlfw();
 		}
 		return glfwWindow;

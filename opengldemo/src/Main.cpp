@@ -1,16 +1,12 @@
 #include "pch.h"
 #include "Application.h"
-#include "Logger.h"
+#include "Log.h"
 
 int main()
 {
-	Demo::Logger::SetGlobalLevel(Demo::LogLevel::Trace);
-	Demo::Logger::GlobalInfo("Start");
-
+	Demo::Log::SetLevel(Demo::LogLevel::Trace);
 	Demo::Application* application = new Demo::Application();
 	application->Run();
 	delete application;
-
-	Demo::Logger::GlobalInfo("Finish");
 	std::cin.get();
 }

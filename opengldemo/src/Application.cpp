@@ -1,24 +1,25 @@
 #include "pch.h"
 #include "Application.h"
-#include "Event.h"
 
 namespace Demo
 {
 	Application::Application()
+		: tag(TAG(Application)), running(false)
 	{
-		logger = std::make_unique<Logger>(typeid(Application).name());
-		logger->Trace("Creating");
-		window = std::make_unique<Window>("OpenGL Demo", 640, 480);
+		LOG_T(tag, "Creating");
+		window = new Window("OpenGL Demo", 640, 480);
 		window->SetEventListener([this](const Event& event)
 		{
 			OnEvent(event);
 		});
-		logger->Trace("Created");
+		LOG_T(tag, "Created");
 	}
 
 	Application::~Application()
 	{
-		logger->Trace("Destroyed");
+		LOG_T(tag, "Destroying");
+		delete window;
+		LOG_T(tag, "Destroyed");
 	}
 
 	void Application::Run()
@@ -33,11 +34,9 @@ namespace Demo
 
 	void Application::OnEvent(const Event& event)
 	{
-		logger->Info("Received event [{0}]", event.ToString());
-		//logger->Info("Received event [{0}]", event.GetName());
+		LOG_I(tag, "Received event [{0}]", event.ToString());
 		if (event.GetType() == EventType::WindowClose)
 		{
-			
 			SetRunning(false);
 		}
 		if (event.GetType() == EventType::WindowResize)
@@ -47,7 +46,7 @@ namespace Demo
 
 	void Application::SetRunning(bool running)
 	{
-		logger->Info("Running [{0}]", running);
+		LOG_I(tag, "Running [{0}]", running);
 		this->running = running;
 	}
 }

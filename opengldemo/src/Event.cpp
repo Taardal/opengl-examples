@@ -1,16 +1,10 @@
 #include "pch.h"
 #include "Event.h"
 
-#define TO_STRING(value) #value
-
 namespace Demo
 {
-	Event::Event(const EventType& type, const std::string& name)
+	Event::Event(EventType type, const std::string& name)
 		: type(type), name(name), handled(false)
-	{
-	}
-
-	Event::~Event()
 	{
 	}
 

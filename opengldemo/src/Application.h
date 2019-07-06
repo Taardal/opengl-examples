@@ -1,15 +1,15 @@
 #pragma once
 
+#include "Log.h"
 #include "Window.h"
-#include "Logger.h"
 
 namespace Demo
 {
 	class Application
 	{
 	private:
-		std::unique_ptr<Logger> logger;
-		std::unique_ptr<Window> window;
+		Window* window;
+		std::string tag;
 		bool running;
 
 	public:

@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Core.h"
+
 namespace Demo
 {
 	enum class EventType
@@ -15,8 +17,8 @@ namespace Demo
 		std::string name;
 		bool handled;
 
-		Event(const EventType& type, const std::string& name);
-		virtual ~Event();
+		Event(EventType type, const std::string& name);
+		virtual ~Event() = default;
 
 	public:
 		const EventType& GetType() const;
