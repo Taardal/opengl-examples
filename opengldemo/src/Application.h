@@ -2,6 +2,7 @@
 
 #include "Core.h"
 #include "Window.h"
+#include "layers/LayerStack.h"
 
 namespace Demo
 {
@@ -9,6 +10,7 @@ namespace Demo
 	{
 	private:
 		Window* window;
+		LayerStack layerStack;
 		std::string tag;
 		bool running;
 
@@ -21,6 +23,7 @@ namespace Demo
 
 	private:
 		void SetRunning(bool running);
+		void OnLayerEvent(const Event& event);
 	};
 }
 

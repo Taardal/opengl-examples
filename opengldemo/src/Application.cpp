@@ -25,18 +25,31 @@ namespace Demo
 		}
 	}
 
-	void Application::OnEvent(const Event& event)
-	{
-		LOG_I(tag, "Received event: {0}", event.ToString());
-		if (event.GetType() == EventType::WindowClose)
-		{
-			SetRunning(false);
-		}
-	}
-
 	void Application::SetRunning(bool running)
 	{
 		LOG_I(tag, "Running: {0}", running);
 		this->running = running;
+	}
+
+	void Application::OnEvent(const Event& event)
+	{
+		LOG_D(tag, "Received event: {0}", event.ToString());
+		if (event.GetType() == EventType::WindowClose)
+		{
+			SetRunning(false);
+		}
+		else
+		{
+			OnLayerEvent(event);
+		}
+	}
+
+	void Application::OnLayerEvent(const Event& event)
+	{
+		for (auto iterator = layerStack.end(); iterator != layerStack.begin(); --iterator)
+		{
+			Layer* layer = *iterator;
+			layer->OnEvent(event);
+		}
 	}
 }
