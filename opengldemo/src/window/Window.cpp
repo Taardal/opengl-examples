@@ -1,23 +1,31 @@
 #include "pch.h"
 #include "Window.h"
+#include "events/WindowEvent.h"
+#include "events/KeyEvent.h"
+#include "events/MouseEvent.h"
 
 namespace Demo
 {
 	static bool glfwInitialized = false;
 
 	Window::Window(const std::string& title, int width, int height)
-		: tag(TO_STRING(Window)), windowData({ title, width, height })
+		: tag(TO_STRING(Window)), windowData(title, width, height)
 	{
-		InitGlfw();
-		glfwWindow = GetGlfwWindow();
-		glfwMakeContextCurrent(glfwWindow);
-		glfwSetWindowUserPointer(glfwWindow, &windowData);
-		SetGlfwCallbacks();
+		Init();
+		graphicsContext = new GraphicsContext(glfwWindow);
+		imGuiRenderer = new ImGuiRenderer(windowData);
 	}
 
 	Window::~Window()
 	{
+		delete imGuiRenderer;
+		delete graphicsContext;
 		TerminateGlfw();
+	}
+
+	ImGuiRenderer* Window::GetImGuiRenderer() const
+	{
+		return imGuiRenderer;
 	}
 
 	void Window::SetEventCallback(const std::function<void(Event&)>& onEvent)
@@ -25,27 +33,46 @@ namespace Demo
 		windowData.OnEvent = onEvent;
 	}
 
+	bool Window::IsVync() const
+	{
+		return windowData.VSync;
+	}
+
+	void Window::SetVSync(bool vSync)
+	{
+		int interval = vSync ? 1 : 0;
+		glfwSwapInterval(interval);
+		windowData.VSync = vSync;
+	}
+
 	void Window::OnUpdate()
 	{
-		glfwSwapBuffers(glfwWindow);
+		graphicsContext->SwapBuffers();
 		glfwPollEvents();
+	}
+
+	void Window::Init()
+	{
+		InitGlfw();
+		glfwWindow = GetGlfwWindow();
+		glfwSetWindowUserPointer(glfwWindow, &windowData);
+		SetGlfwCallbacks();
 	}
 
 	void Window::InitGlfw()
 	{
 		if (!glfwInitialized)
 		{
-			if (!glfwInit())
+			if (glfwInit() == GLFW_TRUE)
 			{
-				LOG_C(tag, "Could not init GLFW");
+				glfwSetErrorCallback(OnGlfwError);
+				glfwInitialized = true;
+			}
+			else
+			{
+				LOG_CRITICAL(tag, "Could not init GLFW");
 			}
 		}
-	}
-
-	void Window::TerminateGlfw()
-	{
-		glfwTerminate();
-		LOG_I(tag, "Terminated GLFW");
 	}
 
 	GLFWwindow* Window::GetGlfwWindow()
@@ -53,7 +80,7 @@ namespace Demo
 		GLFWwindow* glfwWindow = CreateGlfwWindow();
 		if (!glfwWindow)
 		{
-			LOG_C(tag, "Could not create GLFW window");
+			LOG_CRITICAL(tag, "Could not create GLFW window");
 			TerminateGlfw();
 		}
 		return glfwWindow;
@@ -153,6 +180,17 @@ namespace Demo
 			}
 			}
 		});
+	}
+
+	void Window::TerminateGlfw()
+	{
+		glfwTerminate();
+		LOG_DEBUG(tag, "Terminated GLFW");
+	}
+
+	void Window::OnGlfwError(int error, const char* description)
+	{
+		LOG_ERROR(TO_STRING(Window), "GLFW error ({0}): {1}", error, description);
 	}
 
 }

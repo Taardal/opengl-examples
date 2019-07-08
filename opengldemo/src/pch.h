@@ -8,4 +8,5 @@
 #include <unordered_map>
 #include <utility>
 
+#include "Core.h"
 #include "Log.h"

@@ -1,15 +1,13 @@
 #pragma once
 
-#include "spdlog/spdlog.h"
+#include <spdlog/spdlog.h>
 
-#include "Core.h"
-
-#define LOG_T(tag, message, ...) Demo::Log::Trace(Demo::Log::GetPrefixedMessage(message, tag, __func__, __LINE__), __VA_ARGS__)
-#define LOG_D(tag, message, ...) Demo::Log::Debug(Demo::Log::GetPrefixedMessage(message, tag, __func__, __LINE__), __VA_ARGS__)
-#define LOG_I(tag, message, ...) Demo::Log::Info(Demo::Log::GetPrefixedMessage(message, tag, __func__, __LINE__), __VA_ARGS__)
-#define LOG_W(tag, message, ...) Demo::Log::Warn(Demo::Log::GetPrefixedMessage(message, tag, __func__, __LINE__), __VA_ARGS__)
-#define LOG_E(tag, message, ...) Demo::Log::Error(Demo::Log::GetPrefixedMessage(message, tag, __func__, __LINE__), __VA_ARGS__)
-#define LOG_C(tag, message, ...) Demo::Log::Critical(Demo::Log::GetPrefixedMessage(message, tag, __func__, __LINE__), __VA_ARGS__)
+#define LOG_TRACE(tag, message, ...) Demo::Log::Trace(Demo::Log::GetPrefixedMessage(message, tag, __func__, __LINE__), __VA_ARGS__)
+#define LOG_DEBUG(tag, message, ...) Demo::Log::Debug(Demo::Log::GetPrefixedMessage(message, tag, __func__, __LINE__), __VA_ARGS__)
+#define LOG_INFO(tag, message, ...) Demo::Log::Info(Demo::Log::GetPrefixedMessage(message, tag, __func__, __LINE__), __VA_ARGS__)
+#define LOG_WARN(tag, message, ...) Demo::Log::Warn(Demo::Log::GetPrefixedMessage(message, tag, __func__, __LINE__), __VA_ARGS__)
+#define LOG_ERROR(tag, message, ...) Demo::Log::Error(Demo::Log::GetPrefixedMessage(message, tag, __func__, __LINE__), __VA_ARGS__)
+#define LOG_CRITICAL(tag, message, ...) Demo::Log::Critical(Demo::Log::GetPrefixedMessage(message, tag, __func__, __LINE__), __VA_ARGS__)
 
 namespace Demo
 {
@@ -25,6 +23,10 @@ namespace Demo
 
 	class Log
 	{
+	private:
+		Log() = default;
+		~Log() = default;
+
 	public:
 		static void SetLevel(LogLevel logLevel);
 		static std::string GetPrefixedMessage(const std::string& message, const std::string& tag, const std::string& functionName, int lineNumber);
@@ -66,9 +68,6 @@ namespace Demo
 		}
 
 	private:
-		Log() = default;
-		~Log() = default;
-
 		static spdlog::level::level_enum GetSpdLogLevel(LogLevel logLevel);
 	};
 }

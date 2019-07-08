@@ -25,6 +25,7 @@ namespace Demo
 		EventType type;
 		bool handled;
 
+	protected:
 		Event(const std::string& name, EventType type);
 		virtual ~Event() = default;
 

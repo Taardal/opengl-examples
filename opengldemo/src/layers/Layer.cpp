@@ -1,10 +1,12 @@
 #include "pch.h"
 #include "Layer.h"
 
+#include <imgui.h>
+
 namespace Demo
 {
 	Layer::Layer(const std::string& name)
-		: tag(TO_STRING(Layer)), name(name)
+		: name(name)
 	{
 	}
 
@@ -16,7 +18,18 @@ namespace Demo
 	std::string Layer::ToString() const
 	{
 		std::stringstream ss;
-		ss << tag << "{name=" << name << "}";
+		ss << name << "{}";
 		return ss.str();
+	}
+
+	ImGuiLayer::ImGuiLayer()
+		: Layer(TO_STRING(ImGuiLayer))
+	{
+	}
+
+	void ImGuiLayer::OnImGuiRender()
+	{
+		static bool show = true;
+		ImGui::ShowDemoWindow(&show);
 	}
 }

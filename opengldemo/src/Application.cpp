@@ -7,7 +7,8 @@ namespace Demo
 		: tag(TO_STRING(Application)), running(false)
 	{
 		window = new Window("OpenGL Demo", 640, 480);
-		window->SetEventCallback(BIND_FN(Application::OnEvent));
+		window->SetEventCallback(BIND_FUNCTION(Application::OnEvent));
+		layerStack.PushLayer(new ImGuiLayer());
 	}
 
 	Application::~Application()
@@ -21,19 +22,31 @@ namespace Demo
 		while (running)
 		{
 			glClear(GL_COLOR_BUFFER_BIT);
+			RenderImGui();
 			window->OnUpdate();
 		}
 	}
 
 	void Application::SetRunning(bool running)
 	{
-		LOG_I(tag, "Running: {0}", running);
+		LOG_DEBUG(tag, "Running: {0}", running);
 		this->running = running;
+	}
+
+	void Application::RenderImGui()
+	{
+		ImGuiRenderer* imGuiRenderer = window->GetImGuiRenderer();
+		imGuiRenderer->Begin();
+		for (Layer* layer : layerStack)
+		{
+			layer->OnImGuiRender();
+		}
+		imGuiRenderer->End();
 	}
 
 	void Application::OnEvent(const Event& event)
 	{
-		LOG_D(tag, "Received event: {0}", event.ToString());
+		LOG_DEBUG(tag, "Received event: {0}", event.ToString());
 		if (event.GetType() == EventType::WindowClose)
 		{
 			SetRunning(false);
@@ -46,9 +59,9 @@ namespace Demo
 
 	void Application::OnLayerEvent(const Event& event)
 	{
-		for (auto iterator = layerStack.end(); iterator != layerStack.begin(); --iterator)
+		for (auto iterator = layerStack.end(); iterator != layerStack.begin();)
 		{
-			Layer* layer = *iterator;
+			Layer* layer = *--iterator;
 			layer->OnEvent(event);
 		}
 	}

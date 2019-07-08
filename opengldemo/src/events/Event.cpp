@@ -30,6 +30,8 @@ namespace Demo
 
 	std::string Event::ToString() const
 	{
-		return GetName();
+		std::stringstream ss;
+		ss << name << "{}";
+		return ss.str();
 	}
 }

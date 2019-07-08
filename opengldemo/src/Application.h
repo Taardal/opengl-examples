@@ -1,7 +1,6 @@
 #pragma once
 
-#include "Core.h"
-#include "Window.h"
+#include "window/Window.h"
 #include "layers/LayerStack.h"
 
 namespace Demo
@@ -23,6 +22,7 @@ namespace Demo
 
 	private:
 		void SetRunning(bool running);
+		void RenderImGui();
 		void OnLayerEvent(const Event& event);
 	};
 }
