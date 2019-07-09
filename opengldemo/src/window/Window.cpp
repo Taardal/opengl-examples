@@ -6,21 +6,25 @@
 
 namespace Demo
 {
-	static bool glfwInitialized = false;
+	bool Window::glfwInitialized = false;
 
 	Window::Window(const std::string& title, int width, int height)
 		: tag(TO_STRING(Window)), windowData(title, width, height)
 	{
 		Init();
 		graphicsContext = new GraphicsContext(glfwWindow);
-		imGuiRenderer = new ImGuiRenderer(windowData);
+		imGuiRenderer = new ImGuiRenderer(glfwWindow, windowData);
+		inputPoller = new InputPoller(glfwWindow);
+		LOG_TRACE(tag, "Created");
 	}
 
 	Window::~Window()
 	{
+		delete inputPoller;
 		delete imGuiRenderer;
 		delete graphicsContext;
 		TerminateGlfw();
+		LOG_TRACE(tag, "Destroyed");
 	}
 
 	ImGuiRenderer* Window::GetImGuiRenderer() const
@@ -28,7 +32,12 @@ namespace Demo
 		return imGuiRenderer;
 	}
 
-	void Window::SetEventCallback(const std::function<void(Event&)>& onEvent)
+	InputPoller* Window::GetInputPoller() const
+	{
+		return inputPoller;
+	}
+
+	void Window::SetEventCallback(const std::function<void(const Event&)>& onEvent)
 	{
 		windowData.OnEvent = onEvent;
 	}
@@ -179,6 +188,12 @@ namespace Demo
 				break;
 			}
 			}
+		});
+		glfwSetCursorPosCallback(glfwWindow, [](GLFWwindow* glfwWindow, double xpos, double ypos)
+		{
+			WindowData* windowData = (WindowData*)glfwGetWindowUserPointer(glfwWindow);
+			MouseMovedEvent event((float) xpos, (float) ypos);
+			windowData->OnEvent(event);
 		});
 	}
 

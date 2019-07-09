@@ -14,7 +14,7 @@ namespace Demo
 
 	public:
 		virtual std::string ToString() const override;
-		int GetKeyCode() const;
+		virtual int GetKeyCode() const;
 	};
 
 	class KeyPressedEvent : public KeyEvent

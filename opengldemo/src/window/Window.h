@@ -4,6 +4,7 @@
 #include "events/Event.h"
 #include "graphics/GraphicsContext.h"
 #include "graphics/ImGuiRenderer.h"
+#include "input/InputPoller.h"
 
 namespace Demo
 {	
@@ -12,11 +13,11 @@ namespace Demo
 	private:
 		struct WindowData : public WindowProps
 		{
-			std::function<void(Event&)> OnEvent;
+			std::function<void(const Event&)> OnEvent;
 			bool VSync;
 
 			WindowData(const std::string& title, int width, int height)
-				: WindowProps({ title, width, height })
+				: WindowProps({ title, width, height }), VSync(false)
 			{
 			}
 		};
@@ -27,13 +28,16 @@ namespace Demo
 		GLFWwindow* glfwWindow;
 		GraphicsContext* graphicsContext;
 		ImGuiRenderer* imGuiRenderer;
+		InputPoller* inputPoller;
+		static bool glfwInitialized;
 
 	public:
 		Window(const std::string& title, int width, int height);
 		~Window();
 
 		ImGuiRenderer* GetImGuiRenderer() const;
-		void SetEventCallback(const std::function<void(Event&)>& onEvent);
+		InputPoller* GetInputPoller() const;
+		void SetEventCallback(const std::function<void(const Event&)>& onEvent);
 		bool IsVync() const;
 		void SetVSync(bool vSync);
 		void OnUpdate();

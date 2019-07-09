@@ -11,6 +11,12 @@ namespace Demo
 		glfwMakeContextCurrent(glfwWindow);
 		InitGlew();
 		LogOpenGLInfo();
+		LOG_TRACE(tag, "Created");
+	}
+
+	GraphicsContext::~GraphicsContext()
+	{
+		LOG_TRACE(tag, "Destroyed");
 	}
 
 	void GraphicsContext::SwapBuffers()

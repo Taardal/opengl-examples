@@ -21,7 +21,7 @@ namespace Demo
 		void OnEvent(const Event& event);
 
 	private:
-		void SetRunning(bool running);
+		void Stop();
 		void RenderImGui();
 		void OnLayerEvent(const Event& event);
 	};

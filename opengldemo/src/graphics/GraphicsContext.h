@@ -13,6 +13,7 @@ namespace Demo
 
 	public:
 		GraphicsContext(GLFWwindow* glfwWindow);
+		~GraphicsContext();
 
 		void SwapBuffers();
 

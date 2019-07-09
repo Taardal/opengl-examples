@@ -1,5 +1,6 @@
 #pragma once
 
+#include "GraphicsContext.h"
 #include "window/WindowProps.h"
 
 namespace Demo
@@ -8,11 +9,12 @@ namespace Demo
 	{
 	private:
 		std::string tag;
+		GLFWwindow* glfwWindow;
 		WindowProps windowProps;
 		float time = 0.0f;
 
 	public:
-		ImGuiRenderer(const WindowProps& windowProps);
+		ImGuiRenderer(GLFWwindow* glfwWindow, const WindowProps& windowProps);
 		~ImGuiRenderer();
 
 		void Begin();
@@ -22,5 +24,6 @@ namespace Demo
 		void SetConfig();
 		void InitImplementations();
 		void SetStyle();
+		void RenderPlatformWindows();
 	};
 }

@@ -1,5 +1,7 @@
 #include "pch.h"
 #include "Application.h"
+#include "events/KeyEvent.h"
+#include "events/MouseEvent.h"
 
 namespace Demo
 {
@@ -9,16 +11,19 @@ namespace Demo
 		window = new Window("OpenGL Demo", 640, 480);
 		window->SetEventCallback(BIND_FUNCTION(Application::OnEvent));
 		layerStack.PushLayer(new ImGuiLayer());
+		LOG_TRACE(tag, "Created");
 	}
 
 	Application::~Application()
 	{
 		delete window;
+		LOG_TRACE(tag, "Destroyed");
 	}
 
 	void Application::Run()
 	{
-		SetRunning(true);
+		LOG_DEBUG(tag, "Running");
+		running = true;
 		while (running)
 		{
 			glClear(GL_COLOR_BUFFER_BIT);
@@ -27,10 +32,10 @@ namespace Demo
 		}
 	}
 
-	void Application::SetRunning(bool running)
+	void Application::Stop()
 	{
-		LOG_DEBUG(tag, "Running: {0}", running);
-		this->running = running;
+		LOG_DEBUG(tag, "Stopping");
+		this->running = false;
 	}
 
 	void Application::RenderImGui()
@@ -49,7 +54,7 @@ namespace Demo
 		LOG_DEBUG(tag, "Received event: {0}", event.ToString());
 		if (event.GetType() == EventType::WindowClose)
 		{
-			SetRunning(false);
+			Stop();
 		}
 		else
 		{
