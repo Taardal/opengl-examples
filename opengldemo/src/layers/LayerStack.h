@@ -7,8 +7,9 @@ namespace Demo
 	class LayerStack
 	{
 	private:
+		static std::string tag;
+
 		std::vector<Layer*> layers;
-		std::string tag;
 		unsigned int layerInsertIndex;
 
 	public:

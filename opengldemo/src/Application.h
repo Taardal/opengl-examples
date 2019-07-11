@@ -8,9 +8,13 @@ namespace Demo
 	class Application
 	{
 	private:
+		static std::string tag;
+
 		Window* window;
+		Renderer* renderer;
+		ImGuiRenderer* imGuiRenderer;
+		InputPoller* inputPoller;
 		LayerStack layerStack;
-		std::string tag;
 		bool running;
 
 	public:
@@ -22,6 +26,7 @@ namespace Demo
 
 	private:
 		void Stop();
+		void Render();
 		void RenderImGui();
 		void OnLayerEvent(const Event& event);
 	};

@@ -1,17 +1,16 @@
 #pragma once
 
-#include "graphics/GraphicsContext.h"
+#include <GLFW/glfw3.h>
 
 namespace Demo
 {
 	class InputPoller
 	{
 	private:
-		std::string tag;
-		GLFWwindow* glfwWindow;
+		static std::string tag;
 
 	public:
-		InputPoller(GLFWwindow* glfwWindow);
+		InputPoller();
 		~InputPoller();
 
 		bool IsKeyPressed(int keyCode) const;

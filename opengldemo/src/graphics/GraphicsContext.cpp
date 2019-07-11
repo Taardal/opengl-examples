@@ -3,14 +3,15 @@
 
 namespace Demo
 {
-	static bool glewInitialized = false;
+	std::string GraphicsContext::tag = TO_STRING(GraphicsContext);
+	bool GraphicsContext::glewInitialized = false;
 
 	GraphicsContext::GraphicsContext(GLFWwindow* glfwWindow)
-		: tag(TO_STRING(GraphicsContext)), glfwWindow(glfwWindow)
+		: glfwWindow(glfwWindow)
 	{
 		glfwMakeContextCurrent(glfwWindow);
 		InitGlew();
-		LogOpenGLInfo();
+		LogContext();
 		LOG_TRACE(tag, "Created");
 	}
 
@@ -30,6 +31,7 @@ namespace Demo
 		{
 			if (glewInit() == GLEW_OK)
 			{
+				LOG_DEBUG(tag, "GLEW initialized");
 				glewInitialized = true;
 			}
 			else
@@ -39,7 +41,7 @@ namespace Demo
 		}
 	}
 
-	void GraphicsContext::LogOpenGLInfo()
+	void GraphicsContext::LogContext()
 	{
 		LOG_INFO(tag, "OpenGL Info:");
 		LOG_INFO(tag, "Vendor: {0}", glGetString(GL_VENDOR));

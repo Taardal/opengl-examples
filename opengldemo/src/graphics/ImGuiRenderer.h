@@ -1,24 +1,21 @@
 #pragma once
 
 #include "GraphicsContext.h"
-#include "window/WindowProps.h"
 
 namespace Demo
 {
 	class ImGuiRenderer
 	{
 	private:
-		std::string tag;
+		static std::string tag;
 		GLFWwindow* glfwWindow;
-		WindowProps windowProps;
-		float time = 0.0f;
 
 	public:
-		ImGuiRenderer(GLFWwindow* glfwWindow, const WindowProps& windowProps);
+		ImGuiRenderer();
 		~ImGuiRenderer();
 
 		void Begin();
-		void End();
+		void End(float windowWidth, float windowHeight);
 
 	private:
 		void SetConfig();

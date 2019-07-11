@@ -3,8 +3,9 @@
 
 namespace Demo
 {
-	InputPoller::InputPoller(GLFWwindow* glfwWindow)
-		: tag(TO_STRING(Input)), glfwWindow(glfwWindow)
+	std::string InputPoller::tag = TO_STRING(InputPoller);
+
+	InputPoller::InputPoller()
 	{
 		LOG_TRACE(tag, "Created");
 	}
@@ -16,13 +17,13 @@ namespace Demo
 
 	bool InputPoller::IsKeyPressed(int keyCode) const
 	{
-		int state = glfwGetKey(glfwWindow, keyCode);
+		int state = glfwGetKey(glfwGetCurrentContext(), keyCode);
 		return state == GLFW_PRESS || state == GLFW_REPEAT;
 	}
 
 	bool InputPoller::IsMouseButtonPressed(int keyCode) const
 	{
-		int state = glfwGetMouseButton(glfwWindow, keyCode);
+		int state = glfwGetMouseButton(glfwGetCurrentContext(), keyCode);
 		return state == GLFW_PRESS;
 	}
 
@@ -30,7 +31,7 @@ namespace Demo
 	{
 		double x;
 		double y;
-		glfwGetCursorPos(glfwWindow, &x, &y);
+		glfwGetCursorPos(glfwGetCurrentContext(), &x, &y);
 		return { (float) x, (float) y };
 	}
 }

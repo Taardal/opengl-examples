@@ -97,7 +97,10 @@
     <ClCompile Include="src\events\MouseEvent.cpp" />
     <ClCompile Include="src\events\WindowEvent.cpp" />
     <ClCompile Include="src\graphics\GraphicsContext.cpp" />
+    <ClCompile Include="src\graphics\Renderer.cpp" />
     <ClCompile Include="src\input\InputPoller.cpp" />
+    <ClCompile Include="src\layers\DemoLayer.cpp" />
+    <ClCompile Include="src\layers\ImGuiLayer.cpp" />
     <ClCompile Include="src\layers\Layer.cpp" />
     <ClCompile Include="src\layers\LayerStack.cpp" />
     <ClCompile Include="src\Log.cpp" />
@@ -108,7 +111,6 @@
     </ClCompile>
     <ClCompile Include="src\graphics\ImGuiRenderer.cpp" />
     <ClCompile Include="src\window\Window.cpp" />
-    <ClCompile Include="src\window\WindowProps.cpp" />
     <ClCompile Include="vendor\imgui-docking\examples\imgui_impl_glfw.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
@@ -142,14 +144,17 @@
     <ClInclude Include="src\events\MouseEvent.h" />
     <ClInclude Include="src\events\WindowEvent.h" />
     <ClInclude Include="src\graphics\GraphicsContext.h" />
+    <ClInclude Include="src\graphics\Renderer.h" />
     <ClInclude Include="src\input\InputPoller.h" />
+    <ClInclude Include="src\input\KeyCodes.h" />
+    <ClInclude Include="src\layers\DemoLayer.h" />
+    <ClInclude Include="src\layers\ImGuiLayer.h" />
     <ClInclude Include="src\layers\Layer.h" />
     <ClInclude Include="src\layers\LayerStack.h" />
     <ClInclude Include="src\Log.h" />
     <ClInclude Include="src\pch.h" />
     <ClInclude Include="src\graphics\ImGuiRenderer.h" />
     <ClInclude Include="src\window\Window.h" />
-    <ClInclude Include="src\window\WindowProps.h" />
     <ClInclude Include="vendor\imgui-docking\examples\imgui_impl_glfw.h" />
     <ClInclude Include="vendor\imgui-docking\examples\imgui_impl_opengl3.h" />
     <ClInclude Include="vendor\imgui-docking\imconfig.h" />

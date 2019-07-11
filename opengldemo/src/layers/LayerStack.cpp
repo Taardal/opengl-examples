@@ -3,8 +3,10 @@
 
 namespace Demo
 {
+	std::string LayerStack::tag = TO_STRING(LayerStack);
+
 	LayerStack::LayerStack()
-		: tag(TO_STRING(LayerStack)), layerInsertIndex(0)
+		: layerInsertIndex(0)
 	{
 	}
 

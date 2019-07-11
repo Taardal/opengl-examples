@@ -1,21 +1,32 @@
 #include "pch.h"
 #include "Application.h"
+#include "layers/DemoLayer.h"
+#include "layers/ImGuiLayer.h"
 #include "events/KeyEvent.h"
 #include "events/MouseEvent.h"
 
 namespace Demo
 {
+	std::string Application::tag = TO_STRING(Application);
+
 	Application::Application()
-		: tag(TO_STRING(Application)), running(false)
+		: running(false)
 	{
 		window = new Window("OpenGL Demo", 640, 480);
-		window->SetEventCallback(BIND_FUNCTION(Application::OnEvent));
-		layerStack.PushLayer(new ImGuiLayer());
+		window->SetEventListener(BIND_FUNCTION(Application::OnEvent));
+		renderer = new Renderer();
+		imGuiRenderer = new ImGuiRenderer();
+		inputPoller = new InputPoller();
+		layerStack.PushLayer(new DemoLayer());
+		layerStack.PushOverlay(new ImGuiLayer());
 		LOG_TRACE(tag, "Created");
 	}
 
 	Application::~Application()
 	{
+		delete inputPoller;
+		delete imGuiRenderer;
+		delete renderer;
 		delete window;
 		LOG_TRACE(tag, "Destroyed");
 	}
@@ -26,7 +37,7 @@ namespace Demo
 		running = true;
 		while (running)
 		{
-			glClear(GL_COLOR_BUFFER_BIT);
+			Render();
 			RenderImGui();
 			window->OnUpdate();
 		}
@@ -38,15 +49,24 @@ namespace Demo
 		this->running = false;
 	}
 
+	void Application::Render()
+	{
+		renderer->Begin();
+		for (Layer* layer : layerStack)
+		{
+			layer->OnRender();
+		}
+		renderer->End();
+	}
+
 	void Application::RenderImGui()
 	{
-		ImGuiRenderer* imGuiRenderer = window->GetImGuiRenderer();
 		imGuiRenderer->Begin();
 		for (Layer* layer : layerStack)
 		{
 			layer->OnImGuiRender();
 		}
-		imGuiRenderer->End();
+		imGuiRenderer->End(window->GetWidth(), window->GetHeight());
 	}
 
 	void Application::OnEvent(const Event& event)

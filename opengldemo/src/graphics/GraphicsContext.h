@@ -8,7 +8,9 @@ namespace Demo
 	class GraphicsContext
 	{
 	private:
-		std::string tag;
+		static std::string tag;
+		static bool glewInitialized;
+
 		GLFWwindow* glfwWindow;
 
 	public:
@@ -19,6 +21,6 @@ namespace Demo
 
 	private:
 		void InitGlew();
-		void LogOpenGLInfo();
+		void LogContext();
 	};
 }

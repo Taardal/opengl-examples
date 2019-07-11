@@ -7,8 +7,9 @@
 
 namespace Demo
 {
-	ImGuiRenderer::ImGuiRenderer(GLFWwindow* glfwWindow, const WindowProps& windowProps)
-		: tag(TO_STRING(ImGuiRenderer)), glfwWindow(glfwWindow), windowProps(windowProps)
+	std::string ImGuiRenderer::tag = TO_STRING(ImGuiRenderer);
+
+	ImGuiRenderer::ImGuiRenderer()
 	{
 		IMGUI_CHECKVERSION();
 		ImGui::CreateContext();
@@ -33,10 +34,10 @@ namespace Demo
 		ImGui::NewFrame();
 	}
 
-	void ImGuiRenderer::End()
+	void ImGuiRenderer::End(float windowWidth, float windowHeight)
 	{
 		ImGuiIO& io = ImGui::GetIO();
-		io.DisplaySize = ImVec2((float)windowProps.Width, (float)windowProps.Height);
+		io.DisplaySize = ImVec2(windowWidth, windowHeight);
 		ImGui::Render();
 		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 		if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
@@ -56,7 +57,7 @@ namespace Demo
 	void ImGuiRenderer::InitImplementations()
 	{
 		bool installCallbacks = true;
-		ImGui_ImplGlfw_InitForOpenGL(glfwWindow, installCallbacks);
+		ImGui_ImplGlfw_InitForOpenGL(glfwGetCurrentContext(), installCallbacks);
 		const char* glslVersion = "#version 410";
 		ImGui_ImplOpenGL3_Init(glslVersion);
 	}

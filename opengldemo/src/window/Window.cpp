@@ -6,40 +6,47 @@
 
 namespace Demo
 {
+	std::string Window::tag = TO_STRING(Window);
 	bool Window::glfwInitialized = false;
 
 	Window::Window(const std::string& title, int width, int height)
-		: tag(TO_STRING(Window)), windowData(title, width, height)
+		: windowData({ title, width, height })
 	{
-		Init();
+		InitGlfw();
+		glfwWindow = CreateGlfwWindow();
 		graphicsContext = new GraphicsContext(glfwWindow);
-		imGuiRenderer = new ImGuiRenderer(glfwWindow, windowData);
-		inputPoller = new InputPoller(glfwWindow);
+		glfwSetWindowUserPointer(glfwWindow, &windowData);
+		SetGlfwCallbacks();
+		SetVSync(true);
 		LOG_TRACE(tag, "Created");
 	}
 
 	Window::~Window()
 	{
-		delete inputPoller;
-		delete imGuiRenderer;
 		delete graphicsContext;
 		TerminateGlfw();
 		LOG_TRACE(tag, "Destroyed");
 	}
 
-	ImGuiRenderer* Window::GetImGuiRenderer() const
+	void Window::OnUpdate()
 	{
-		return imGuiRenderer;
+		graphicsContext->SwapBuffers();
+		glfwPollEvents();
 	}
 
-	InputPoller* Window::GetInputPoller() const
-	{
-		return inputPoller;
-	}
-
-	void Window::SetEventCallback(const std::function<void(const Event&)>& onEvent)
+	void Window::SetEventListener(const std::function<void(const Event&)>& onEvent)
 	{
 		windowData.OnEvent = onEvent;
+	}
+
+	float Window::GetWidth() const
+	{
+		return (float) windowData.Width;
+	}
+
+	float Window::GetHeight() const
+	{
+		return (float) windowData.Height;
 	}
 
 	bool Window::IsVync() const
@@ -54,18 +61,9 @@ namespace Demo
 		windowData.VSync = vSync;
 	}
 
-	void Window::OnUpdate()
+	void Window::OnGlfwError(int error, const char* description)
 	{
-		graphicsContext->SwapBuffers();
-		glfwPollEvents();
-	}
-
-	void Window::Init()
-	{
-		InitGlfw();
-		glfwWindow = GetGlfwWindow();
-		glfwSetWindowUserPointer(glfwWindow, &windowData);
-		SetGlfwCallbacks();
+		LOG_ERROR(TO_STRING(Window), "GLFW error ({0}): {1}", error, description);
 	}
 
 	void Window::InitGlfw()
@@ -76,36 +74,31 @@ namespace Demo
 			{
 				glfwSetErrorCallback(OnGlfwError);
 				glfwInitialized = true;
+				LOG_DEBUG(tag, "GLFW initialized");
 			}
 			else
 			{
 				LOG_CRITICAL(tag, "Could not init GLFW");
 			}
 		}
-	}
-
-	GLFWwindow* Window::GetGlfwWindow()
-	{
-		GLFWwindow* glfwWindow = CreateGlfwWindow();
-		if (!glfwWindow)
-		{
-			LOG_CRITICAL(tag, "Could not create GLFW window");
-			TerminateGlfw();
-		}
-		return glfwWindow;
-	}
+	} 
 
 	GLFWwindow* Window::CreateGlfwWindow()
 	{
 		GLFWmonitor* fullscreenMonitor = nullptr;
 		GLFWwindow* sharedWindow = nullptr;
-		return glfwCreateWindow(
+		GLFWwindow* glfwWindow = glfwCreateWindow(
 			windowData.Width,
 			windowData.Height,
 			windowData.Title.c_str(),
 			fullscreenMonitor,
 			sharedWindow
 		);
+		if (!glfwWindow)
+		{
+			LOG_CRITICAL(tag, "Could not create GLFW window");
+		}
+		return glfwWindow;
 	}
 
 	void Window::SetGlfwCallbacks()
@@ -193,19 +186,15 @@ namespace Demo
 		{
 			WindowData* windowData = (WindowData*)glfwGetWindowUserPointer(glfwWindow);
 			MouseMovedEvent event((float) xpos, (float) ypos);
-			windowData->OnEvent(event);
+			//windowData->OnEvent(event);
 		});
 	}
 
 	void Window::TerminateGlfw()
 	{
+		glfwDestroyWindow(glfwWindow);
 		glfwTerminate();
 		LOG_DEBUG(tag, "Terminated GLFW");
-	}
-
-	void Window::OnGlfwError(int error, const char* description)
-	{
-		LOG_ERROR(TO_STRING(Window), "GLFW error ({0}): {1}", error, description);
 	}
 
 }

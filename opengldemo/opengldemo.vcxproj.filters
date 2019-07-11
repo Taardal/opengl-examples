@@ -72,10 +72,16 @@
     <ClCompile Include="src\window\Window.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\window\WindowProps.cpp">
+    <ClCompile Include="src\input\InputPoller.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\input\InputPoller.cpp">
+    <ClCompile Include="src\layers\ImGuiLayer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\layers\DemoLayer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\graphics\Renderer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -143,10 +149,19 @@
     <ClInclude Include="src\window\Window.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\window\WindowProps.h">
+    <ClInclude Include="src\input\InputPoller.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\input\InputPoller.h">
+    <ClInclude Include="src\input\KeyCodes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\layers\DemoLayer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\layers\ImGuiLayer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\graphics\Renderer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

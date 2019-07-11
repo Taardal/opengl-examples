@@ -8,7 +8,7 @@ namespace Demo
 		spdlog::set_level(GetSpdLogLevel(logLevel));
 	}
 
-	std::string Log::GetPrefixedMessage(const std::string& message, const std::string& tag, const std::string& functionName, int lineNumber)
+	std::string Log::GetLogMessage(const std::string& message, const std::string& tag, const std::string& functionName, int lineNumber)
 	{
 		std::stringstream ss;
 		ss << "[" << tag << ":" << functionName << ":" << lineNumber << "] - " << message;
