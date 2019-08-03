@@ -98,8 +98,9 @@
     <ClCompile Include="src\events\WindowEvent.cpp" />
     <ClCompile Include="src\graphics\GraphicsContext.cpp" />
     <ClCompile Include="src\graphics\Renderer.cpp" />
+    <ClCompile Include="src\graphics\Shader.cpp" />
     <ClCompile Include="src\input\InputPoller.cpp" />
-    <ClCompile Include="src\layers\DemoLayer.cpp" />
+    <ClCompile Include="src\layers\ExampleLayer.cpp" />
     <ClCompile Include="src\layers\ImGuiLayer.cpp" />
     <ClCompile Include="src\layers\Layer.cpp" />
     <ClCompile Include="src\layers\LayerStack.cpp" />
@@ -145,9 +146,11 @@
     <ClInclude Include="src\events\WindowEvent.h" />
     <ClInclude Include="src\graphics\GraphicsContext.h" />
     <ClInclude Include="src\graphics\Renderer.h" />
+    <ClInclude Include="src\graphics\Shader.h" />
     <ClInclude Include="src\input\InputPoller.h" />
     <ClInclude Include="src\input\KeyCodes.h" />
-    <ClInclude Include="src\layers\DemoLayer.h" />
+    <ClInclude Include="src\input\MouseButtonCodes.h" />
+    <ClInclude Include="src\layers\ExampleLayer.h" />
     <ClInclude Include="src\layers\ImGuiLayer.h" />
     <ClInclude Include="src\layers\Layer.h" />
     <ClInclude Include="src\layers\LayerStack.h" />

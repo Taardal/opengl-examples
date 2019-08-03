@@ -1,10 +1,11 @@
 #pragma once
 
 #include "Layer.h"
+#include "graphics/Shader.h"
 
 namespace Demo
 {
-	class DemoLayer : public Layer
+	class ExampleLayer : public Layer
 	{
 	private:
 		static std::string tag;
@@ -12,9 +13,11 @@ namespace Demo
 		unsigned int vertexArrayId;
 		unsigned int vertexBufferId;
 		unsigned int indexBufferId;
+		Shader* shader;
 
 	public:
-		DemoLayer();
+		ExampleLayer();
+		~ExampleLayer();
 
 		virtual void OnAttach() override;
 		virtual void OnDetach() override;
