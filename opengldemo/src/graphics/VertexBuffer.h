@@ -1,4 +1,5 @@
 #pragma once
+
 #include "VertexBufferLayout.h"
 
 namespace Demo

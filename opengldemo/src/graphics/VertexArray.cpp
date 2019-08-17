@@ -1,38 +1,10 @@
 #include "pch.h"
 #include "VertexArray.h"
+#include "VertexAttribute.h"
 #include <GL/glew.h>
 
 namespace Demo
 {
-	static GLenum GetOpenGLDataType(ShaderDataType type)
-	{
-		switch (type)
-		{
-		case ShaderDataType::Float:
-			return GL_FLOAT;
-		case ShaderDataType::Float2:
-			return GL_FLOAT;
-		case ShaderDataType::Float3:
-			return GL_FLOAT;
-		case ShaderDataType::Float4:
-			return GL_FLOAT;
-		case ShaderDataType::Mat3:
-			return GL_FLOAT;
-		case ShaderDataType::Mat4:
-			return GL_FLOAT;
-		case ShaderDataType::Int:
-			return GL_INT;
-		case ShaderDataType::Int2:
-			return GL_INT;
-		case ShaderDataType::Int3:
-			return GL_INT;
-		case ShaderDataType::Int4:
-			return GL_INT;
-		case ShaderDataType::Bool:
-			return GL_BOOL;
-		}
-	}
-
 	VertexArray::VertexArray()
 		: vertexBuffers{}, indexBuffer(nullptr)
 	{
@@ -72,17 +44,17 @@ namespace Demo
 		glBindVertexArray(id);
 		vertexBuffer->Bind();
 		unsigned int index = 0;
-		const VertexBufferLayout& layout = vertexBuffer->GetLayout();
-		for (const VertexBufferElement& element : layout)
+		const auto& layout = vertexBuffer->GetLayout();
+		for (const auto& vertexAttribute : layout)
 		{
 			glEnableVertexAttribArray(index);
 			glVertexAttribPointer(
 				index,
-				element.GetComponentCount(),
-				GetOpenGLDataType(element.Type),
-				element.Normalized ? GL_TRUE : GL_FALSE,
+				vertexAttribute.Length,
+				vertexAttribute.OpenGLDataType,
+				vertexAttribute.Normalized ? GL_TRUE : GL_FALSE,
 				layout.GetStride(),
-				(const void*)element.Offset
+				(const void*)vertexAttribute.Offset
 			);
 			index++;
 		}

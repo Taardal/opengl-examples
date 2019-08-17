@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "ExampleLayer.h"
-#include "graphics/VertexBufferLayout.h"
-
+#include "graphics/VertexBuffer.h"
+#include "graphics/VertexAttribute.h"
 #include <GL/glew.h>
 
 namespace Demo
@@ -19,11 +19,10 @@ namespace Demo
 			 0.0f,  0.5f, 0.0f, 0.8f, 0.8f, 0.2f, 1.0f
 		};
 		VertexBuffer* vertexBuffer = new VertexBuffer(vertices, sizeof(vertices));
-		VertexBufferLayout vertexBufferLayout = {
-			{ ShaderDataType::Float3, "positionAttribute" },
-			{ ShaderDataType::Float4, "colorAttribute" }
-		};
-		vertexBuffer->SetLayout(vertexBufferLayout);
+		vertexBuffer->SetLayout({
+			{ GLSLDataType::Vec3, "positionAttribute" },
+			{ GLSLDataType::Vec4, "colorAttribute" }
+		});
 		vertexArray->AddVertexBuffer(vertexBuffer);
 
 		unsigned int indices[3] = { 0, 1, 2 };
