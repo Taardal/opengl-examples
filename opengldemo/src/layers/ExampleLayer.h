@@ -1,6 +1,9 @@
 #pragma once
 
 #include "Layer.h"
+#include "graphics/VertexArray.h"
+#include "graphics/VertexBuffer.h"
+#include "graphics/IndexBuffer.h"
 #include "graphics/Shader.h"
 
 namespace Demo
@@ -10,9 +13,7 @@ namespace Demo
 	private:
 		static std::string tag;
 
-		unsigned int vertexArrayId;
-		unsigned int vertexBufferId;
-		unsigned int indexBufferId;
+		VertexArray* vertexArray;
 		Shader* shader;
 
 	public:

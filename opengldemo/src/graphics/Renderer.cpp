@@ -1,6 +1,5 @@
 #include "pch.h"
 #include "Renderer.h"
-
 #include <GL/glew.h>
 
 namespace Demo

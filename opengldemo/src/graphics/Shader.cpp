@@ -14,21 +14,19 @@ namespace Demo
 		{
 			id = CreateProgram(vertexShaderId, fragmentShaderId);
 		}
-		LOG_TRACE(tag, "Created");
 	}
 
 	Shader::~Shader()
 	{
 		glDeleteProgram(id);
-		LOG_TRACE(tag, "Created");
 	}
 
-	void Shader::Bind()
+	void Shader::Bind() const
 	{
 		glUseProgram(id);
 	}
 
-	void Shader::Unbind()
+	void Shader::Unbind() const
 	{
 		glUseProgram(0);
 	}

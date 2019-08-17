@@ -97,8 +97,12 @@
     <ClCompile Include="src\events\MouseEvent.cpp" />
     <ClCompile Include="src\events\WindowEvent.cpp" />
     <ClCompile Include="src\graphics\GraphicsContext.cpp" />
+    <ClCompile Include="src\graphics\IndexBuffer.cpp" />
     <ClCompile Include="src\graphics\Renderer.cpp" />
     <ClCompile Include="src\graphics\Shader.cpp" />
+    <ClCompile Include="src\graphics\VertexArray.cpp" />
+    <ClCompile Include="src\graphics\VertexBuffer.cpp" />
+    <ClCompile Include="src\graphics\VertexBufferLayout.cpp" />
     <ClCompile Include="src\input\InputPoller.cpp" />
     <ClCompile Include="src\layers\ExampleLayer.cpp" />
     <ClCompile Include="src\layers\ImGuiLayer.cpp" />
@@ -145,8 +149,12 @@
     <ClInclude Include="src\events\MouseEvent.h" />
     <ClInclude Include="src\events\WindowEvent.h" />
     <ClInclude Include="src\graphics\GraphicsContext.h" />
+    <ClInclude Include="src\graphics\IndexBuffer.h" />
     <ClInclude Include="src\graphics\Renderer.h" />
     <ClInclude Include="src\graphics\Shader.h" />
+    <ClInclude Include="src\graphics\VertexArray.h" />
+    <ClInclude Include="src\graphics\VertexBuffer.h" />
+    <ClInclude Include="src\graphics\VertexBufferLayout.h" />
     <ClInclude Include="src\input\InputPoller.h" />
     <ClInclude Include="src\input\KeyCodes.h" />
     <ClInclude Include="src\input\MouseButtonCodes.h" />
