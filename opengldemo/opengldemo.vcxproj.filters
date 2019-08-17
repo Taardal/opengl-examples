@@ -69,9 +69,6 @@
     <ClCompile Include="src\graphics\GraphicsContext.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\window\Window.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\input\InputPoller.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -82,9 +79,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\graphics\Shader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\layers\ExampleLayer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\graphics\VertexBuffer.cpp">
@@ -100,6 +94,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\graphics\VertexBufferLayout.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Window.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\layers\TriangleLayer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -164,9 +164,6 @@
     <ClInclude Include="src\graphics\GraphicsContext.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\window\Window.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\input\InputPoller.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -180,9 +177,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\graphics\Shader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\layers\ExampleLayer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\input\MouseButtonCodes.h">
@@ -201,6 +195,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\graphics\VertexBufferLayout.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Window.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\layers\TriangleLayer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

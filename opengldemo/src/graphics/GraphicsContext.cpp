@@ -30,7 +30,7 @@ namespace Demo
 		{
 			if (glewInit() == GLEW_OK)
 			{
-				LOG_DEBUG(TAG, "GLEW initialized");
+				LOG_INFO(TAG, "GLEW initialized");
 				glewInitialized = true;
 			}
 			else
@@ -42,7 +42,6 @@ namespace Demo
 
 	void GraphicsContext::LogContext()
 	{
-		LOG_INFO(TAG, "OpenGL Info:");
 		LOG_INFO(TAG, "Vendor: {0}", glGetString(GL_VENDOR));
 		LOG_INFO(TAG, "Renderer: {0}", glGetString(GL_RENDERER));
 		LOG_INFO(TAG, "Version: {0}", glGetString(GL_VERSION));

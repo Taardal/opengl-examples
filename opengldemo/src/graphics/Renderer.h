@@ -1,5 +1,7 @@
 #pragma once
 
+#include "graphics/VertexArray.h"
+
 namespace Demo
 {
 	class Renderer
@@ -10,5 +12,6 @@ namespace Demo
 
 		void Begin();
 		void End();
+		void DrawElements(IndexBuffer* indexBuffer, unsigned int startOffset = 0);
 	};
 }

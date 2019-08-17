@@ -105,7 +105,7 @@
     <ClCompile Include="src\graphics\VertexBuffer.cpp" />
     <ClCompile Include="src\graphics\VertexBufferLayout.cpp" />
     <ClCompile Include="src\input\InputPoller.cpp" />
-    <ClCompile Include="src\layers\ExampleLayer.cpp" />
+    <ClCompile Include="src\layers\TriangleLayer.cpp" />
     <ClCompile Include="src\layers\ImGuiLayer.cpp" />
     <ClCompile Include="src\layers\Layer.cpp" />
     <ClCompile Include="src\layers\LayerStack.cpp" />
@@ -116,7 +116,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="src\graphics\ImGuiRenderer.cpp" />
-    <ClCompile Include="src\window\Window.cpp" />
+    <ClCompile Include="src\Window.cpp" />
     <ClCompile Include="vendor\imgui-docking\examples\imgui_impl_glfw.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
@@ -160,14 +160,14 @@
     <ClInclude Include="src\input\InputPoller.h" />
     <ClInclude Include="src\input\KeyCodes.h" />
     <ClInclude Include="src\input\MouseButtonCodes.h" />
-    <ClInclude Include="src\layers\ExampleLayer.h" />
+    <ClInclude Include="src\layers\TriangleLayer.h" />
     <ClInclude Include="src\layers\ImGuiLayer.h" />
     <ClInclude Include="src\layers\Layer.h" />
     <ClInclude Include="src\layers\LayerStack.h" />
     <ClInclude Include="src\Log.h" />
     <ClInclude Include="src\pch.h" />
     <ClInclude Include="src\graphics\ImGuiRenderer.h" />
-    <ClInclude Include="src\window\Window.h" />
+    <ClInclude Include="src\Window.h" />
     <ClInclude Include="vendor\imgui-docking\examples\imgui_impl_glfw.h" />
     <ClInclude Include="vendor\imgui-docking\examples\imgui_impl_opengl3.h" />
     <ClInclude Include="vendor\imgui-docking\imconfig.h" />

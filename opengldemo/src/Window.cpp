@@ -73,7 +73,7 @@ namespace Demo
 			{
 				glfwSetErrorCallback(OnGlfwError);
 				glfwInitialized = true;
-				LOG_DEBUG(TAG, "GLFW initialized");
+				LOG_INFO(TAG, "GLFW initialized");
 			}
 			else
 			{
@@ -185,7 +185,7 @@ namespace Demo
 		{
 			WindowData* windowData = (WindowData*)glfwGetWindowUserPointer(glfwWindow);
 			MouseMovedEvent event((float) xpos, (float) ypos);
-			//windowData->OnEvent(event);
+			windowData->OnEvent(event);
 		});
 	}
 
@@ -193,7 +193,7 @@ namespace Demo
 	{
 		glfwDestroyWindow(glfwWindow);
 		glfwTerminate();
-		LOG_DEBUG(TAG, "Terminated GLFW");
+		LOG_INFO(TAG, "GLFW terminated");
 	}
 
 }

@@ -5,19 +5,20 @@
 #define TAG typeid(*this).name()
 #define TAG_1(type) typeid(type).name()
 
-#define GET_LOG_MESSAGE(tag, message) Demo::Log::GetLogMessage(message, tag, __func__, __LINE__)
+#define LOG_MESSAGE(tag, message) Demo::Log::GetLogMessage(message, tag, __func__, __LINE__)
 
-#define LOG_TRACE(tag, message, ...) Demo::Log::Trace(GET_LOG_MESSAGE(tag, message), __VA_ARGS__)
-#define LOG_DEBUG(tag, message, ...) Demo::Log::Debug(GET_LOG_MESSAGE(tag, message), __VA_ARGS__)
-#define LOG_INFO(tag, message, ...) Demo::Log::Info(GET_LOG_MESSAGE(tag, message), __VA_ARGS__)
-#define LOG_WARN(tag, message, ...) Demo::Log::Warn(GET_LOG_MESSAGE(tag, message), __VA_ARGS__)
-#define LOG_ERROR(tag, message, ...) Demo::Log::Error(GET_LOG_MESSAGE(tag, message), __VA_ARGS__)
-#define LOG_CRITICAL(tag, message, ...) Demo::Log::Critical(GET_LOG_MESSAGE(tag, message), __VA_ARGS__)
+#define LOG_TRACE(tag, message, ...) Demo::Log::Trace(LOG_MESSAGE(tag, message), __VA_ARGS__)
+#define LOG_DEBUG(tag, message, ...) Demo::Log::Debug(LOG_MESSAGE(tag, message), __VA_ARGS__)
+#define LOG_INFO(tag, message, ...) Demo::Log::Info(LOG_MESSAGE(tag, message), __VA_ARGS__)
+#define LOG_WARN(tag, message, ...) Demo::Log::Warn(LOG_MESSAGE(tag, message), __VA_ARGS__)
+#define LOG_ERROR(tag, message, ...) Demo::Log::Error(LOG_MESSAGE(tag, message), __VA_ARGS__)
+#define LOG_CRITICAL(tag, message, ...) Demo::Log::Critical(LOG_MESSAGE(tag, message), __VA_ARGS__)
 
 namespace Demo
 {
 	enum class LogLevel
 	{
+		None = 0,
 		Trace,
 		Debug,
 		Info,

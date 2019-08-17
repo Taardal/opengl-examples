@@ -1,6 +1,6 @@
 #pragma once
 
-#include "window/Window.h"
+#include "Window.h"
 #include "layers/LayerStack.h"
 
 namespace Demo

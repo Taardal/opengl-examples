@@ -22,7 +22,7 @@ namespace Demo
 	{
 	}
 
-	void ImGuiLayer::OnRender()
+	void ImGuiLayer::OnRender(Renderer* renderer)
 	{
 	}
 

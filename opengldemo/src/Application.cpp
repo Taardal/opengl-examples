@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "Application.h"
-#include "layers/ExampleLayer.h"
+#include "layers/TriangleLayer.h"
 #include "layers/ImGuiLayer.h"
 #include "events/KeyEvent.h"
 #include "events/MouseEvent.h"
@@ -15,7 +15,7 @@ namespace Demo
 		renderer = new Renderer();
 		imGuiRenderer = new ImGuiRenderer();
 		inputPoller = new InputPoller();
-		layerStack.PushLayer(new ExampleLayer());
+		layerStack.PushLayer(new TriangleLayer());
 		layerStack.PushOverlay(new ImGuiLayer());
 		LOG_TRACE(TAG, "Created");
 	}
@@ -52,7 +52,7 @@ namespace Demo
 		renderer->Begin();
 		for (Layer* layer : layerStack)
 		{
-			layer->OnRender();
+			layer->OnRender(renderer);
 		}
 		renderer->End();
 	}
@@ -69,7 +69,10 @@ namespace Demo
 
 	void Application::OnEvent(const Event& event)
 	{
-		LOG_DEBUG(TAG, "Received event: {0}", event.ToString());
+		if (event.GetType() != EventType::MouseMoved)
+		{
+			LOG_DEBUG(TAG, "Received event: {0}", event.ToString());
+		}
 		if (event.GetType() == EventType::WindowClose)
 		{
 			Stop();
