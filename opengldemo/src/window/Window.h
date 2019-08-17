@@ -20,9 +20,8 @@ namespace Demo
 			std::function<void(const Event&)> OnEvent;
 		};
 
-		static std::string tag;
+	private:
 		static bool glfwInitialized;
-
 		WindowData windowData;
 		GLFWwindow* glfwWindow;
 		GraphicsContext* graphicsContext;
@@ -40,7 +39,6 @@ namespace Demo
 
 	private:
 		static void OnGlfwError(int error, const char* description);
-
 		void InitGlfw();
 		GLFWwindow* CreateGlfwWindow();
 		void SetGlfwCallbacks();

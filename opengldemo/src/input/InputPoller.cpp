@@ -3,16 +3,14 @@
 
 namespace Demo
 {
-	std::string InputPoller::tag = TO_STRING(InputPoller);
-
 	InputPoller::InputPoller()
 	{
-		LOG_TRACE(tag, "Created");
+		LOG_TRACE(TAG, "Created");
 	}
 
 	InputPoller::~InputPoller()
 	{
-		LOG_TRACE(tag, "Destroyed");
+		LOG_TRACE(TAG, "Destroyed");
 	}
 
 	bool InputPoller::IsKeyPressed(int keyCode) const

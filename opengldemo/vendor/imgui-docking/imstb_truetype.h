@@ -1271,29 +1271,29 @@ static stbtt_int16 ttSHORT(stbtt_uint8 *p)   { return p[0]*256 + p[1]; }
 static stbtt_uint32 ttULONG(stbtt_uint8 *p)  { return (p[0]<<24) + (p[1]<<16) + (p[2]<<8) + p[3]; }
 static stbtt_int32 ttLONG(stbtt_uint8 *p)    { return (p[0]<<24) + (p[1]<<16) + (p[2]<<8) + p[3]; }
 
-#define stbtt_tag4(p,c0,c1,c2,c3) ((p)[0] == (c0) && (p)[1] == (c1) && (p)[2] == (c2) && (p)[3] == (c3))
-#define stbtt_tag(p,str)           stbtt_tag4(p,str[0],str[1],str[2],str[3])
+#define stbtt_TAG4(p,c0,c1,c2,c3) ((p)[0] == (c0) && (p)[1] == (c1) && (p)[2] == (c2) && (p)[3] == (c3))
+#define stbtt_TAG(p,str)           stbtt_TAG4(p,str[0],str[1],str[2],str[3])
 
 static int stbtt__isfont(stbtt_uint8 *font)
 {
    // check the version number
-   if (stbtt_tag4(font, '1',0,0,0))  return 1; // TrueType 1
-   if (stbtt_tag(font, "typ1"))   return 1; // TrueType with type 1 font -- we don't support this!
-   if (stbtt_tag(font, "OTTO"))   return 1; // OpenType with CFF
-   if (stbtt_tag4(font, 0,1,0,0)) return 1; // OpenType 1.0
-   if (stbtt_tag(font, "true"))   return 1; // Apple specification for TrueType fonts
+   if (stbtt_TAG4(font, '1',0,0,0))  return 1; // TrueType 1
+   if (stbtt_TAG(font, "typ1"))   return 1; // TrueType with type 1 font -- we don't support this!
+   if (stbtt_TAG(font, "OTTO"))   return 1; // OpenType with CFF
+   if (stbtt_TAG4(font, 0,1,0,0)) return 1; // OpenType 1.0
+   if (stbtt_TAG(font, "true"))   return 1; // Apple specification for TrueType fonts
    return 0;
 }
 
 // @OPTIMIZE: binary search
-static stbtt_uint32 stbtt__find_table(stbtt_uint8 *data, stbtt_uint32 fontstart, const char *tag)
+static stbtt_uint32 stbtt__find_table(stbtt_uint8 *data, stbtt_uint32 fontstart, const char *TAG)
 {
    stbtt_int32 num_tables = ttUSHORT(data+fontstart+4);
    stbtt_uint32 tabledir = fontstart + 12;
    stbtt_int32 i;
    for (i=0; i < num_tables; ++i) {
       stbtt_uint32 loc = tabledir + 16*i;
-      if (stbtt_tag(data+loc+0, tag))
+      if (stbtt_TAG(data+loc+0, TAG))
          return ttULONG(data+loc+8);
    }
    return 0;
@@ -1306,7 +1306,7 @@ static int stbtt_GetFontOffsetForIndex_internal(unsigned char *font_collection, 
       return index == 0 ? 0 : -1;
 
    // check if it's a TTC
-   if (stbtt_tag(font_collection, "ttcf")) {
+   if (stbtt_TAG(font_collection, "ttcf")) {
       // version 1?
       if (ttULONG(font_collection+4) == 0x00010000 || ttULONG(font_collection+4) == 0x00020000) {
          stbtt_int32 n = ttLONG(font_collection+8);
@@ -1325,7 +1325,7 @@ static int stbtt_GetNumberOfFonts_internal(unsigned char *font_collection)
       return 1;
 
    // check if it's a TTC
-   if (stbtt_tag(font_collection, "ttcf")) {
+   if (stbtt_TAG(font_collection, "ttcf")) {
       // version 1?
       if (ttULONG(font_collection+4) == 0x00010000 || ttULONG(font_collection+4) == 0x00020000) {
          return ttLONG(font_collection+8);

@@ -4,8 +4,6 @@
 
 namespace Demo
 {
-	std::string Shader::tag = TO_STRING(Shader);
-
 	Shader::Shader(const std::string& vertexSource, const std::string& fragmentSource)
 	{
 		unsigned int vertexShaderId = CreateShader(GL_VERTEX_SHADER, vertexSource);
@@ -63,7 +61,7 @@ namespace Demo
 		bool compiled = status != 0;
 		if (!compiled)
 		{
-			LOG_ERROR(tag, "Could not compile shader: {0}", GetShaderLog(shaderId));
+			LOG_ERROR(TAG, "Could not compile shader: {0}", GetShaderLog(shaderId));
 		}
 		return compiled;
 	}
@@ -106,7 +104,7 @@ namespace Demo
 		bool linked = status != 0;
 		if (!linked)
 		{
-			LOG_ERROR(tag, "Could not link shader program: {0}", GetProgramLog(programId));
+			LOG_ERROR(TAG, "Could not link shader program: {0}", GetProgramLog(programId));
 		}
 		return linked;
 	}

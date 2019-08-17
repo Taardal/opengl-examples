@@ -7,8 +7,6 @@
 
 namespace Demo
 {
-	std::string ImGuiRenderer::tag = TO_STRING(ImGuiRenderer);
-
 	ImGuiRenderer::ImGuiRenderer()
 	{
 		IMGUI_CHECKVERSION();
@@ -16,7 +14,7 @@ namespace Demo
 		SetConfig();
 		InitImplementations();
 		SetStyle();
-		LOG_TRACE(tag, "Created");
+		LOG_TRACE(TAG, "Created");
 	}
 
 	ImGuiRenderer::~ImGuiRenderer()
@@ -24,7 +22,7 @@ namespace Demo
 		ImGui_ImplOpenGL3_Shutdown();
 		ImGui_ImplGlfw_Shutdown();
 		ImGui::DestroyContext();
-		LOG_TRACE(tag, "Destroyed");
+		LOG_TRACE(TAG, "Destroyed");
 	}
 
 	void ImGuiRenderer::Begin()

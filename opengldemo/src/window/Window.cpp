@@ -6,7 +6,6 @@
 
 namespace Demo
 {
-	std::string Window::tag = TO_STRING(Window);
 	bool Window::glfwInitialized = false;
 
 	Window::Window(const std::string& title, int width, int height)
@@ -18,14 +17,14 @@ namespace Demo
 		glfwSetWindowUserPointer(glfwWindow, &windowData);
 		SetGlfwCallbacks();
 		SetVSync(true);
-		LOG_TRACE(tag, "Created");
+		LOG_TRACE(TAG, "Created");
 	}
 
 	Window::~Window()
 	{
 		delete graphicsContext;
 		TerminateGlfw();
-		LOG_TRACE(tag, "Destroyed");
+		LOG_TRACE(TAG, "Destroyed");
 	}
 
 	void Window::OnUpdate()
@@ -63,7 +62,7 @@ namespace Demo
 
 	void Window::OnGlfwError(int error, const char* description)
 	{
-		LOG_ERROR(TO_STRING(Window), "GLFW error ({0}): {1}", error, description);
+		LOG_ERROR(TAG_1(Window), "GLFW error ({0}): {1}", error, description);
 	}
 
 	void Window::InitGlfw()
@@ -74,11 +73,11 @@ namespace Demo
 			{
 				glfwSetErrorCallback(OnGlfwError);
 				glfwInitialized = true;
-				LOG_DEBUG(tag, "GLFW initialized");
+				LOG_DEBUG(TAG, "GLFW initialized");
 			}
 			else
 			{
-				LOG_CRITICAL(tag, "Could not init GLFW");
+				LOG_CRITICAL(TAG, "Could not init GLFW");
 			}
 		}
 	} 
@@ -96,7 +95,7 @@ namespace Demo
 		);
 		if (!glfwWindow)
 		{
-			LOG_CRITICAL(tag, "Could not create GLFW window");
+			LOG_CRITICAL(TAG, "Could not create GLFW window");
 		}
 		return glfwWindow;
 	}
@@ -194,7 +193,7 @@ namespace Demo
 	{
 		glfwDestroyWindow(glfwWindow);
 		glfwTerminate();
-		LOG_DEBUG(tag, "Terminated GLFW");
+		LOG_DEBUG(TAG, "Terminated GLFW");
 	}
 
 }

@@ -7,8 +7,6 @@
 
 namespace Demo
 {
-	std::string Application::tag = TO_STRING(Application);
-
 	Application::Application()
 		: running(false)
 	{
@@ -19,7 +17,7 @@ namespace Demo
 		inputPoller = new InputPoller();
 		layerStack.PushLayer(new ExampleLayer());
 		layerStack.PushOverlay(new ImGuiLayer());
-		LOG_TRACE(tag, "Created");
+		LOG_TRACE(TAG, "Created");
 	}
 
 	Application::~Application()
@@ -28,12 +26,12 @@ namespace Demo
 		delete imGuiRenderer;
 		delete renderer;
 		delete window;
-		LOG_TRACE(tag, "Destroyed");
+		LOG_TRACE(TAG, "Destroyed");
 	}
 
 	void Application::Run()
 	{
-		LOG_DEBUG(tag, "Running");
+		LOG_DEBUG(TAG, "Running");
 		running = true;
 		while (running)
 		{
@@ -45,7 +43,7 @@ namespace Demo
 
 	void Application::Stop()
 	{
-		LOG_DEBUG(tag, "Stopping");
+		LOG_DEBUG(TAG, "Stopping");
 		this->running = false;
 	}
 
@@ -71,7 +69,7 @@ namespace Demo
 
 	void Application::OnEvent(const Event& event)
 	{
-		LOG_DEBUG(tag, "Received event: {0}", event.ToString());
+		LOG_DEBUG(TAG, "Received event: {0}", event.ToString());
 		if (event.GetType() == EventType::WindowClose)
 		{
 			Stop();

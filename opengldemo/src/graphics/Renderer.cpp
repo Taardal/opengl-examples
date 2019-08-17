@@ -4,16 +4,14 @@
 
 namespace Demo
 {
-	std::string Renderer::tag = TO_STRING(Renderer);
-
 	Renderer::Renderer()
 	{
-		LOG_TRACE(tag, "Created");
+		LOG_TRACE(TAG, "Created");
 	}
 
 	Renderer::~Renderer()
 	{
-		LOG_TRACE(tag, "Destroyed");
+		LOG_TRACE(TAG, "Destroyed");
 	}
 
 	void Renderer::Begin()

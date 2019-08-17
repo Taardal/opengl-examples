@@ -11,8 +11,6 @@ namespace Demo
 	class ExampleLayer : public Layer
 	{
 	private:
-		static std::string tag;
-
 		VertexArray* vertexArray;
 		Shader* shader;
 

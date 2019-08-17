@@ -5,7 +5,6 @@ namespace Demo
 	class Shader
 	{
 	private:
-		static std::string tag;
 		unsigned int id;
 
 	public:

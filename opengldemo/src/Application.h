@@ -8,8 +8,6 @@ namespace Demo
 	class Application
 	{
 	private:
-		static std::string tag;
-
 		Window* window;
 		Renderer* renderer;
 		ImGuiRenderer* imGuiRenderer;

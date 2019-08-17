@@ -6,9 +6,6 @@ namespace Demo
 {
 	class InputPoller
 	{
-	private:
-		static std::string tag;
-
 	public:
 		InputPoller();
 		~InputPoller();

@@ -400,13 +400,13 @@ void ImGui_ImplGlfw_NewFrame()
 // If you are new to dear imgui or creating a new binding for dear imgui, it is recommended that you completely ignore this section first..
 //--------------------------------------------------------------------------------------------------------
 
-struct ImGuiViewportDataGlfw
+struct ImGuiViewportDaTAGlfw
 {
     GLFWwindow* Window;
     bool        WindowOwned;
 
-    ImGuiViewportDataGlfw() { Window = NULL; WindowOwned = false; }
-    ~ImGuiViewportDataGlfw() { IM_ASSERT(Window == NULL); }
+    ImGuiViewportDaTAGlfw() { Window = NULL; WindowOwned = false; }
+    ~ImGuiViewportDaTAGlfw() { IM_ASSERT(Window == NULL); }
 };
 
 static void ImGui_ImplGlfw_WindowCloseCallback(GLFWwindow* window)
@@ -429,7 +429,7 @@ static void ImGui_ImplGlfw_WindowSizeCallback(GLFWwindow* window, int, int)
 
 static void ImGui_ImplGlfw_CreateWindow(ImGuiViewport* viewport)
 {
-    ImGuiViewportDataGlfw* data = IM_NEW(ImGuiViewportDataGlfw)();
+    ImGuiViewportDaTAGlfw* data = IM_NEW(ImGuiViewportDaTAGlfw)();
     viewport->PlatformUserData = data;
 
     // GLFW 3.2 unfortunately always set focus on glfwCreateWindow() if GLFW_VISIBLE is set, regardless of GLFW_FOCUSED
@@ -469,7 +469,7 @@ static void ImGui_ImplGlfw_CreateWindow(ImGuiViewport* viewport)
 
 static void ImGui_ImplGlfw_DestroyWindow(ImGuiViewport* viewport)
 {
-    if (ImGuiViewportDataGlfw* data = (ImGuiViewportDataGlfw*)viewport->PlatformUserData)
+    if (ImGuiViewportDaTAGlfw* data = (ImGuiViewportDaTAGlfw*)viewport->PlatformUserData)
     {
         if (data->WindowOwned)
         {
@@ -506,7 +506,7 @@ static LRESULT CALLBACK WndProcNoInputs(HWND hWnd, UINT msg, WPARAM wParam, LPAR
 
 static void ImGui_ImplGlfw_ShowWindow(ImGuiViewport* viewport)
 {
-    ImGuiViewportDataGlfw* data = (ImGuiViewportDataGlfw*)viewport->PlatformUserData;
+    ImGuiViewportDaTAGlfw* data = (ImGuiViewportDaTAGlfw*)viewport->PlatformUserData;
 
 #if defined(_WIN32)
     // GLFW hack: Hide icon from task bar
@@ -545,7 +545,7 @@ static void ImGui_ImplGlfw_ShowWindow(ImGuiViewport* viewport)
 
 static ImVec2 ImGui_ImplGlfw_GetWindowPos(ImGuiViewport* viewport)
 {
-    ImGuiViewportDataGlfw* data = (ImGuiViewportDataGlfw*)viewport->PlatformUserData;
+    ImGuiViewportDaTAGlfw* data = (ImGuiViewportDaTAGlfw*)viewport->PlatformUserData;
     int x = 0, y = 0;
     glfwGetWindowPos(data->Window, &x, &y);
     return ImVec2((float)x, (float)y);
@@ -553,13 +553,13 @@ static ImVec2 ImGui_ImplGlfw_GetWindowPos(ImGuiViewport* viewport)
 
 static void ImGui_ImplGlfw_SetWindowPos(ImGuiViewport* viewport, ImVec2 pos)
 {
-    ImGuiViewportDataGlfw* data = (ImGuiViewportDataGlfw*)viewport->PlatformUserData;
+    ImGuiViewportDaTAGlfw* data = (ImGuiViewportDaTAGlfw*)viewport->PlatformUserData;
     glfwSetWindowPos(data->Window, (int)pos.x, (int)pos.y);
 }
 
 static ImVec2 ImGui_ImplGlfw_GetWindowSize(ImGuiViewport* viewport)
 {
-    ImGuiViewportDataGlfw* data = (ImGuiViewportDataGlfw*)viewport->PlatformUserData;
+    ImGuiViewportDaTAGlfw* data = (ImGuiViewportDaTAGlfw*)viewport->PlatformUserData;
     int w = 0, h = 0;
     glfwGetWindowSize(data->Window, &w, &h);
     return ImVec2((float)w, (float)h);
@@ -567,20 +567,20 @@ static ImVec2 ImGui_ImplGlfw_GetWindowSize(ImGuiViewport* viewport)
 
 static void ImGui_ImplGlfw_SetWindowSize(ImGuiViewport* viewport, ImVec2 size)
 {
-    ImGuiViewportDataGlfw* data = (ImGuiViewportDataGlfw*)viewport->PlatformUserData;
+    ImGuiViewportDaTAGlfw* data = (ImGuiViewportDaTAGlfw*)viewport->PlatformUserData;
     glfwSetWindowSize(data->Window, (int)size.x, (int)size.y);
 }
 
 static void ImGui_ImplGlfw_SetWindowTitle(ImGuiViewport* viewport, const char* title)
 {
-    ImGuiViewportDataGlfw* data = (ImGuiViewportDataGlfw*)viewport->PlatformUserData;
+    ImGuiViewportDaTAGlfw* data = (ImGuiViewportDaTAGlfw*)viewport->PlatformUserData;
     glfwSetWindowTitle(data->Window, title);
 }
 
 static void ImGui_ImplGlfw_SetWindowFocus(ImGuiViewport* viewport)
 {
 #if GLFW_HAS_FOCUS_WINDOW
-    ImGuiViewportDataGlfw* data = (ImGuiViewportDataGlfw*)viewport->PlatformUserData;
+    ImGuiViewportDaTAGlfw* data = (ImGuiViewportDaTAGlfw*)viewport->PlatformUserData;
     glfwFocusWindow(data->Window);
 #else
     // FIXME: What are the effect of not having this function? At the moment imgui doesn't actually call SetWindowFocus - we set that up ahead, will answer that question later.
@@ -590,34 +590,34 @@ static void ImGui_ImplGlfw_SetWindowFocus(ImGuiViewport* viewport)
 
 static bool ImGui_ImplGlfw_GetWindowFocus(ImGuiViewport* viewport)
 {
-    ImGuiViewportDataGlfw* data = (ImGuiViewportDataGlfw*)viewport->PlatformUserData;
+    ImGuiViewportDaTAGlfw* data = (ImGuiViewportDaTAGlfw*)viewport->PlatformUserData;
     return glfwGetWindowAttrib(data->Window, GLFW_FOCUSED) != 0;
 }
 
 static bool ImGui_ImplGlfw_GetWindowMinimized(ImGuiViewport* viewport)
 {
-    ImGuiViewportDataGlfw* data = (ImGuiViewportDataGlfw*)viewport->PlatformUserData;
+    ImGuiViewportDaTAGlfw* data = (ImGuiViewportDaTAGlfw*)viewport->PlatformUserData;
     return glfwGetWindowAttrib(data->Window, GLFW_ICONIFIED) != 0;
 }
 
 #if GLFW_HAS_WINDOW_ALPHA
 static void ImGui_ImplGlfw_SetWindowAlpha(ImGuiViewport* viewport, float alpha)
 {
-    ImGuiViewportDataGlfw* data = (ImGuiViewportDataGlfw*)viewport->PlatformUserData;
+    ImGuiViewportDaTAGlfw* data = (ImGuiViewportDaTAGlfw*)viewport->PlatformUserData;
     glfwSetWindowOpacity(data->Window, alpha);
 }
 #endif
 
 static void ImGui_ImplGlfw_RenderWindow(ImGuiViewport* viewport, void*)
 {
-    ImGuiViewportDataGlfw* data = (ImGuiViewportDataGlfw*)viewport->PlatformUserData;
+    ImGuiViewportDaTAGlfw* data = (ImGuiViewportDaTAGlfw*)viewport->PlatformUserData;
     if (g_ClientApi == GlfwClientApi_OpenGL)
         glfwMakeContextCurrent(data->Window);
 }
 
 static void ImGui_ImplGlfw_SwapBuffers(ImGuiViewport* viewport, void*)
 {
-    ImGuiViewportDataGlfw* data = (ImGuiViewportDataGlfw*)viewport->PlatformUserData;
+    ImGuiViewportDaTAGlfw* data = (ImGuiViewportDaTAGlfw*)viewport->PlatformUserData;
     if (g_ClientApi == GlfwClientApi_OpenGL) 
     {
         glfwMakeContextCurrent(data->Window);
@@ -671,7 +671,7 @@ enum VkResult { VK_RESULT_MAX_ENUM = 0x7FFFFFFF };
 extern "C" { extern GLFWAPI VkResult glfwCreateWindowSurface(VkInstance instance, GLFWwindow* window, const VkAllocationCallbacks* allocator, VkSurfaceKHR* surface); }
 static int ImGui_ImplGlfw_CreateVkSurface(ImGuiViewport* viewport, ImU64 vk_instance, const void* vk_allocator, ImU64* out_vk_surface)
 {
-    ImGuiViewportDataGlfw* data = (ImGuiViewportDataGlfw*)viewport->PlatformUserData;
+    ImGuiViewportDaTAGlfw* data = (ImGuiViewportDaTAGlfw*)viewport->PlatformUserData;
     IM_ASSERT(g_ClientApi == GlfwClientApi_Vulkan);
     VkResult err = glfwCreateWindowSurface((VkInstance)vk_instance, data->Window, (const VkAllocationCallbacks*)vk_allocator, (VkSurfaceKHR*)out_vk_surface);
     return (int)err;
@@ -751,7 +751,7 @@ static void ImGui_ImplGlfw_InitPlatformInterface()
 
     // Register main window handle (which is owned by the main application, not by us)
     ImGuiViewport* main_viewport = ImGui::GetMainViewport();
-    ImGuiViewportDataGlfw* data = IM_NEW(ImGuiViewportDataGlfw)();
+    ImGuiViewportDaTAGlfw* data = IM_NEW(ImGuiViewportDaTAGlfw)();
     data->Window = g_Window;
     data->WindowOwned = false;
     main_viewport->PlatformUserData = data;

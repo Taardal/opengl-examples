@@ -3,7 +3,6 @@
 
 namespace Demo
 {
-	std::string GraphicsContext::tag = TO_STRING(GraphicsContext);
 	bool GraphicsContext::glewInitialized = false;
 
 	GraphicsContext::GraphicsContext(GLFWwindow* glfwWindow)
@@ -12,12 +11,12 @@ namespace Demo
 		glfwMakeContextCurrent(glfwWindow);
 		InitGlew();
 		LogContext();
-		LOG_TRACE(tag, "Created");
+		LOG_TRACE(TAG, "Created");
 	}
 
 	GraphicsContext::~GraphicsContext()
 	{
-		LOG_TRACE(tag, "Destroyed");
+		LOG_TRACE(TAG, "Destroyed");
 	}
 
 	void GraphicsContext::SwapBuffers()
@@ -31,21 +30,21 @@ namespace Demo
 		{
 			if (glewInit() == GLEW_OK)
 			{
-				LOG_DEBUG(tag, "GLEW initialized");
+				LOG_DEBUG(TAG, "GLEW initialized");
 				glewInitialized = true;
 			}
 			else
 			{
-				LOG_CRITICAL(tag, "Could not init GLEW");
+				LOG_CRITICAL(TAG, "Could not init GLEW");
 			}
 		}
 	}
 
 	void GraphicsContext::LogContext()
 	{
-		LOG_INFO(tag, "OpenGL Info:");
-		LOG_INFO(tag, "Vendor: {0}", glGetString(GL_VENDOR));
-		LOG_INFO(tag, "Renderer: {0}", glGetString(GL_RENDERER));
-		LOG_INFO(tag, "Version: {0}", glGetString(GL_VERSION));
+		LOG_INFO(TAG, "OpenGL Info:");
+		LOG_INFO(TAG, "Vendor: {0}", glGetString(GL_VENDOR));
+		LOG_INFO(TAG, "Renderer: {0}", glGetString(GL_RENDERER));
+		LOG_INFO(TAG, "Version: {0}", glGetString(GL_VERSION));
 	}
 }

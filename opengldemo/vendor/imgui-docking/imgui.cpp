@@ -593,7 +593,7 @@ CODE
       associated to it.
 
  Q: Which version should I get?
- A: I occasionally tag Releases (https://github.com/ocornut/imgui/releases) but it is generally safe 
+ A: I occasionally TAG Releases (https://github.com/ocornut/imgui/releases) but it is generally safe 
     and recommended to sync to master/latest. The library is fairly stable and regressions tend to be 
     fixed fast when reported. You may also peak at the 'docking' branch which includes:
     - Docking/Merging features (https://github.com/ocornut/imgui/issues/2109)
@@ -7908,7 +7908,7 @@ void ImGui::OpenPopupEx(ImGuiID id)
     ImGuiContext& g = *GImGui;
     ImGuiWindow* parent_window = g.CurrentWindow;
     int current_stack_size = g.BeginPopupStack.Size;
-    ImGuiPopupData popup_ref; // Tagged as new ref as Window will be set back to NULL if we write this into OpenPopupStack.
+    ImGuiPopupData popup_ref; // TAGged as new ref as Window will be set back to NULL if we write this into OpenPopupStack.
     popup_ref.PopupId = id;
     popup_ref.Window = NULL;
     popup_ref.SourceWindow = g.NavWindow;
@@ -14537,9 +14537,9 @@ static const char* GetClipboardTextFn_DefaultImpl(void*)
             if (PasteboardCopyItemFlavorData(main_clipboard, item_id, CFSTR("public.utf8-plain-text"), &cf_data) == noErr)
             {
                 static ImVector<char> clipboard_text;
-                int length = (int)CFDataGetLength(cf_data);
+                int length = (int)CFDaTAGetLength(cf_data);
                 clipboard_text.resize(length + 1);
-                CFDataGetBytes(cf_data, CFRangeMake(0, length), (UInt8*)clipboard_text.Data);
+                CFDaTAGetBytes(cf_data, CFRangeMake(0, length), (UInt8*)clipboard_text.Data);
                 clipboard_text[length] = 0;
                 CFRelease(cf_data);
                 return clipboard_text.Data;

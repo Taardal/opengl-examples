@@ -7,7 +7,6 @@ namespace Demo
 	class ImGuiRenderer
 	{
 	private:
-		static std::string tag;
 		GLFWwindow* glfwWindow;
 
 	public:

@@ -6,8 +6,6 @@
 
 namespace Demo
 {
-	std::string ExampleLayer::tag = TO_STRING(ExampleLayer);
-
 	ExampleLayer::ExampleLayer()
 		: Layer(TO_STRING(ExampleLayer))
 	{
