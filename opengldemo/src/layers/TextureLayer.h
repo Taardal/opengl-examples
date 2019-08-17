@@ -3,18 +3,20 @@
 #include "Layer.h"
 #include "graphics/VertexArray.h"
 #include "graphics/Shader.h"
+#include "graphics/Texture.h"
 
 namespace Demo
 {
-	class TriangleLayer : public Layer
+	class TextureLayer : public Layer
 	{
 	private:
 		VertexArray* vertexArray;
 		Shader* shader;
+		Texture* texture;
 
 	public:
-		TriangleLayer();
-		~TriangleLayer();
+		TextureLayer();
+		~TextureLayer();
 
 		virtual void OnAttach() override;
 		virtual void OnDetach() override;

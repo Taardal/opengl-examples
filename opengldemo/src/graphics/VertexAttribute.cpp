@@ -30,6 +30,8 @@ namespace Demo
 			return GL_FLOAT;
 		case GLSLDataType::Mat4:
 			return GL_FLOAT;
+		default:
+			return 0;
 		}
 	}
 
@@ -55,6 +57,8 @@ namespace Demo
 			return sizeof(float) * 3 * 3;
 		case GLSLDataType::Mat4:
 			return sizeof(float) * 4 * 4;
+		default:
+			return 0;
 		}
 	}
 
@@ -80,6 +84,8 @@ namespace Demo
 			return 3 * 3;
 		case GLSLDataType::Mat4:
 			return 4 * 4;
+		default:
+			return 0;
 		}
 	}
 }

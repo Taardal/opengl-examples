@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "Application.h"
 #include "layers/TriangleLayer.h"
+#include "layers/TextureLayer.h"
 #include "layers/ImGuiLayer.h"
 #include "events/KeyEvent.h"
 #include "events/MouseEvent.h"
@@ -15,7 +16,7 @@ namespace Demo
 		renderer = new Renderer();
 		imGuiRenderer = new ImGuiRenderer();
 		inputPoller = new InputPoller();
-		layerStack.PushLayer(new TriangleLayer());
+		layerStack.PushLayer(new TextureLayer());
 		layerStack.PushOverlay(new ImGuiLayer());
 		LOG_TRACE(TAG, "Created");
 	}

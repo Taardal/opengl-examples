@@ -56,7 +56,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)opengldemo\src;$(SolutionDir)opengldemo\vendor\spdlog\include;$(SolutionDir)opengldemo\vendor\glew\include;$(SolutionDir)opengldemo\vendor\glfw\include;$(SolutionDir)opengldemo\vendor\imgui-docking</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)opengldemo\src;$(SolutionDir)opengldemo\vendor\spdlog\include;$(SolutionDir)opengldemo\vendor\glew\include;$(SolutionDir)opengldemo\vendor\glfw\include;$(SolutionDir)opengldemo\vendor\imgui-docking;$(SolutionDir)opengldemo\vendor\stb_image</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <PreprocessorDefinitions>IMGUI_IMPL_OPENGL_LOADER_GLEW;GLEW_STATIC;_CRT_SECURE_NO_WARNINGS;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -76,7 +76,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)opengldemo\src;$(SolutionDir)opengldemo\vendor\spdlog\include;$(SolutionDir)opengldemo\vendor\glew\include;$(SolutionDir)opengldemo\vendor\glfw\include;$(SolutionDir)opengldemo\vendor\imgui-docking</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)opengldemo\src;$(SolutionDir)opengldemo\vendor\spdlog\include;$(SolutionDir)opengldemo\vendor\glew\include;$(SolutionDir)opengldemo\vendor\glfw\include;$(SolutionDir)opengldemo\vendor\imgui-docking;$(SolutionDir)opengldemo\vendor\stb_image</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <PreprocessorDefinitions>IMGUI_IMPL_OPENGL_LOADER_GLEW;GLEW_STATIC;_CRT_SECURE_NO_WARNINGS;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -100,11 +100,13 @@
     <ClCompile Include="src\graphics\IndexBuffer.cpp" />
     <ClCompile Include="src\graphics\Renderer.cpp" />
     <ClCompile Include="src\graphics\Shader.cpp" />
+    <ClCompile Include="src\graphics\Texture.cpp" />
     <ClCompile Include="src\graphics\VertexArray.cpp" />
     <ClCompile Include="src\graphics\VertexAttribute.cpp" />
     <ClCompile Include="src\graphics\VertexBuffer.cpp" />
     <ClCompile Include="src\graphics\VertexBufferLayout.cpp" />
     <ClCompile Include="src\input\InputPoller.cpp" />
+    <ClCompile Include="src\layers\TextureLayer.cpp" />
     <ClCompile Include="src\layers\TriangleLayer.cpp" />
     <ClCompile Include="src\layers\ImGuiLayer.cpp" />
     <ClCompile Include="src\layers\Layer.cpp" />
@@ -141,6 +143,10 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="vendor\stb_image\stb_image.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Application.h" />
@@ -153,6 +159,7 @@
     <ClInclude Include="src\graphics\IndexBuffer.h" />
     <ClInclude Include="src\graphics\Renderer.h" />
     <ClInclude Include="src\graphics\Shader.h" />
+    <ClInclude Include="src\graphics\Texture.h" />
     <ClInclude Include="src\graphics\VertexArray.h" />
     <ClInclude Include="src\graphics\VertexAttribute.h" />
     <ClInclude Include="src\graphics\VertexBuffer.h" />
@@ -160,6 +167,7 @@
     <ClInclude Include="src\input\InputPoller.h" />
     <ClInclude Include="src\input\KeyCodes.h" />
     <ClInclude Include="src\input\MouseButtonCodes.h" />
+    <ClInclude Include="src\layers\TextureLayer.h" />
     <ClInclude Include="src\layers\TriangleLayer.h" />
     <ClInclude Include="src\layers\ImGuiLayer.h" />
     <ClInclude Include="src\layers\Layer.h" />
@@ -176,6 +184,7 @@
     <ClInclude Include="vendor\imgui-docking\imstb_rectpack.h" />
     <ClInclude Include="vendor\imgui-docking\imstb_textedit.h" />
     <ClInclude Include="vendor\imgui-docking\imstb_truetype.h" />
+    <ClInclude Include="vendor\stb_image\stb_image.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
