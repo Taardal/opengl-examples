@@ -29,6 +29,11 @@ namespace Demo
 		glUseProgram(0);
 	}
 
+	void Shader::SetUniform1i(const std::string& key, int value)
+	{
+		glUniform1i(GetUniformLocation(key), value);
+	}
+
 	unsigned int Shader::CreateShader(unsigned int shaderType, const std::string& shaderSource)
 	{
 		unsigned int shaderId = glCreateShader(shaderType);
@@ -116,5 +121,23 @@ namespace Demo
 		std::vector<char> log(logLength);
 		glGetProgramInfoLog(programId, logLength, &logLength, &log[0]);
 		return log.data();
+	}
+
+	int Shader::GetUniformLocation(const std::string& key)
+	{
+		if (uniformLocations.find(key) != uniformLocations.end())
+		{
+			return uniformLocations[key];
+		}
+		else
+		{
+			int location = glGetUniformLocation(id, key.c_str());
+			if (location == -1)
+			{
+				LOG_WARN(TAG, "Uniform [{0}] does not exist", key);
+			}
+			uniformLocations[key] = location;
+			return location;
+		}
 	}
 }

@@ -4,9 +4,7 @@
 
 #define TAG typeid(*this).name()
 #define TAG_1(type) typeid(type).name()
-
 #define LOG_MESSAGE(tag, message) Demo::Log::GetLogMessage(message, tag, __func__, __LINE__)
-
 #define LOG_TRACE(tag, message, ...) Demo::Log::Trace(LOG_MESSAGE(tag, message), __VA_ARGS__)
 #define LOG_DEBUG(tag, message, ...) Demo::Log::Debug(LOG_MESSAGE(tag, message), __VA_ARGS__)
 #define LOG_INFO(tag, message, ...) Demo::Log::Info(LOG_MESSAGE(tag, message), __VA_ARGS__)
@@ -56,7 +54,7 @@ namespace Demo
 		}
 
 		template<typename... T>
-		static void lWarn(const std::string& message, const T& ... args)
+		static void Warn(const std::string& message, const T& ... args)
 		{
 			spdlog::warn(message.c_str(), args...);
 		}

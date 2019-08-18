@@ -6,6 +6,7 @@ namespace Demo
 	{
 	private:
 		unsigned int id;
+		std::unordered_map<std::string, int> uniformLocations;
 
 	public:
 		Shader(const std::string& vertexSource, const std::string& fragmentSource);
@@ -13,6 +14,7 @@ namespace Demo
 
 		void Bind() const;
 		void Unbind() const;
+		void SetUniform1i(const std::string& key, int value);
 
 	private:
 		unsigned int CreateShader(unsigned int shaderType, const std::string& shaderSource);
@@ -22,5 +24,6 @@ namespace Demo
 		unsigned int CreateProgram(unsigned int vertexShaderId, unsigned int fragmentShaderId);
 		bool LinkProgram(unsigned int id);
 		std::string GetProgramLog(unsigned int programId);
+		int GetUniformLocation(const std::string& key);
 	};
 }

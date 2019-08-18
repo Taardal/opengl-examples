@@ -8,7 +8,7 @@ namespace Demo
 	Texture::Texture(const std::string& filepath)
 		: id(0), target(GL_TEXTURE_2D)
 	{
-		Image image = Load(filepath);
+		const Image& image = Load(filepath);
 		Init(image);
 		Free(image);
 	}
@@ -18,8 +18,9 @@ namespace Demo
 		glDeleteTextures(1, &id);
 	}
 
-	void Texture::Bind() const
+	void Texture::Bind(unsigned int textureUnit) const
 	{
+		glActiveTexture(GL_TEXTURE0 + textureUnit);
 		glBindTexture(target, id);
 	}
 
@@ -28,7 +29,7 @@ namespace Demo
 		glBindTexture(target, 0);
 	}
 
-	const Image& Texture::Load(const std::string& filepath)
+	Image Texture::Load(const std::string& filepath)
 	{
 		stbi_set_flip_vertically_on_load(1);
 		int width = 0;

@@ -56,37 +56,40 @@ namespace Demo
 				vec2 textureCoordinate;
 			} in_vertex;
 
-			uniform sampler2D sampler;
+			uniform sampler2D kittenSampler;
+			uniform sampler2D puppySampler;
 
 			out vec4 out_color;
 			
 			void main()
 			{
-				out_color = texture(sampler, in_vertex.textureCoordinate);
+				vec4 kittenColor = texture(kittenSampler, in_vertex.textureCoordinate);
+				vec4 puppyColor = texture(puppySampler, in_vertex.textureCoordinate);
+				out_color = mix(kittenColor, puppyColor, 0.5);
 			}
 		)";
 		shader = new Shader(vertexSource, fragmentSource);
 
-		texture = new Texture("assets/kitten.png");
+		kittenTexture = new Texture("assets/kitten.png");
+		puppyTexture = new Texture("assets/puppy.png");
 	}
 
 	TextureLayer::~TextureLayer()
 	{
-		delete texture;
+		delete puppyTexture;
+		delete kittenTexture;
 		delete shader;
 		delete vertexArray;
 	}
 
 	void TextureLayer::OnAttach()
 	{
-		texture->Bind();
-		shader->Bind();
-		vertexArray->Bind();
 	}
 
 	void TextureLayer::OnDetach()
 	{
-		texture->Unbind();
+		puppyTexture->Unbind();
+		kittenTexture->Unbind();
 		shader->Unbind();
 		vertexArray->Unbind();
 	}
@@ -97,6 +100,18 @@ namespace Demo
 
 	void TextureLayer::OnRender(Renderer* renderer)
 	{
+		vertexArray->Bind();
+		shader->Bind();
+		{
+			int textureUnit = 0;
+			kittenTexture->Bind(textureUnit);
+			shader->SetUniform1i("kittenSampler", textureUnit);
+		}
+		{
+			int textureUnit = 1;
+			puppyTexture->Bind(textureUnit);
+			shader->SetUniform1i("puppySampler", textureUnit);
+		}
 		renderer->DrawElements(vertexArray->GetIndexBuffer());
 	}
 

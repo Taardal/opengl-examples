@@ -17,7 +17,6 @@ namespace Demo
 		imGuiRenderer = new ImGuiRenderer();
 		inputPoller = new InputPoller();
 		layerStack.PushLayer(new TextureLayer());
-		layerStack.PushOverlay(new ImGuiLayer());
 		LOG_TRACE(TAG, "Created");
 	}
 

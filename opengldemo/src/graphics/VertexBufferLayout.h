@@ -20,8 +20,5 @@ namespace Demo
 		std::vector<VertexAttribute>::iterator end();
 		std::vector<VertexAttribute>::const_iterator begin() const;
 		std::vector<VertexAttribute>::const_iterator end() const;
-
-	private:
-		void CalculateStride();
 	};
 }

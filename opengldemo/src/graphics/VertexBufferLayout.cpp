@@ -6,7 +6,11 @@ namespace Demo
 	VertexBufferLayout::VertexBufferLayout(const std::initializer_list<VertexAttribute>& attributes)
 		: attributes(attributes), stride(0)
 	{
-		CalculateStride();
+		for (auto& attribute : this->attributes)
+		{
+			attribute.Offset = stride;
+			stride += attribute.Size;
+		}
 	}
 
 	const std::vector<VertexAttribute>& VertexBufferLayout::GetAttributes() const
@@ -37,14 +41,5 @@ namespace Demo
 	std::vector<VertexAttribute>::const_iterator VertexBufferLayout::end() const
 	{
 		return attributes.end();
-	}
-
-	void VertexBufferLayout::CalculateStride()
-	{
-		for (auto& attribute : attributes)
-		{
-			attribute.Offset = stride;
-			stride += attribute.Size;
-		}
 	}
 }

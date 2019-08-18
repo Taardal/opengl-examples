@@ -12,7 +12,8 @@ namespace Demo
 	private:
 		VertexArray* vertexArray;
 		Shader* shader;
-		Texture* texture;
+		Texture* kittenTexture;
+		Texture* puppyTexture;
 
 	public:
 		TextureLayer();

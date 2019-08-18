@@ -23,12 +23,12 @@ namespace Demo
 		Texture(const std::string& filepath);
 		~Texture();
 
-		void Bind() const;
+		void Bind(unsigned int textureUnit = 0) const;
 		void Unbind() const;
 
 	private:
-		const Image& Load(const std::string& filepath);
-		void Init(const Image& pixels);
-		void Free(const Image& pixels);
+		Image Load(const std::string& filepath);
+		void Init(const Image& image);
+		void Free(const Image& image);
 	};
 }
