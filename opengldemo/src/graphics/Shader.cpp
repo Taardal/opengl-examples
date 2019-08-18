@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "Shader.h"
 #include <GL/glew.h>
+#include <glm/gtc/type_ptr.hpp>
 
 namespace Demo
 {
@@ -32,6 +33,14 @@ namespace Demo
 	void Shader::SetUniform1i(const std::string& key, int value)
 	{
 		glUniform1i(GetUniformLocation(key), value);
+	}
+
+	void Shader::SetUniformMat4f(const std::string& key, glm::mat4 value)
+	{
+		int location = GetUniformLocation(key);
+		int count = 1;
+		int transpose = GL_FALSE;
+		glUniformMatrix4fv(location, count, transpose, glm::value_ptr(value));
 	}
 
 	unsigned int Shader::CreateShader(unsigned int shaderType, const std::string& shaderSource)
@@ -123,20 +132,20 @@ namespace Demo
 		return log.data();
 	}
 
-	int Shader::GetUniformLocation(const std::string& key)
+	int Shader::GetUniformLocation(const std::string& name)
 	{
-		if (uniformLocations.find(key) != uniformLocations.end())
+		if (uniformLocations.find(name) != uniformLocations.end())
 		{
-			return uniformLocations[key];
+			return uniformLocations[name];
 		}
 		else
 		{
-			int location = glGetUniformLocation(id, key.c_str());
+			int location = glGetUniformLocation(id, name.c_str());
 			if (location == -1)
 			{
-				LOG_WARN(TAG, "Uniform [{0}] does not exist", key);
+				LOG_WARN(TAG, "Uniform [{0}] does not exist", name);
 			}
-			uniformLocations[key] = location;
+			uniformLocations[name] = location;
 			return location;
 		}
 	}

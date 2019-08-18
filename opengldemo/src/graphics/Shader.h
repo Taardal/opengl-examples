@@ -1,5 +1,7 @@
 #pragma once
 
+#include <glm/glm.hpp>
+
 namespace Demo
 {
 	class Shader
@@ -15,6 +17,7 @@ namespace Demo
 		void Bind() const;
 		void Unbind() const;
 		void SetUniform1i(const std::string& key, int value);
+		void SetUniformMat4f(const std::string& key, glm::mat4 value);
 
 	private:
 		unsigned int CreateShader(unsigned int shaderType, const std::string& shaderSource);
