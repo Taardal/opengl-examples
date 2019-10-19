@@ -6,6 +6,8 @@ namespace Demo
 {
 	Renderer::Renderer()
 	{
+		glClearColor(0.1f, 0.1f, 0.1f, 1);
+		EnableDepthTest();
 		LOG_TRACE(TAG, "Created");
 	}
 
@@ -16,7 +18,6 @@ namespace Demo
 
 	void Renderer::Begin()
 	{
-		glClearColor(0.1f, 0.1f, 0.1f, 1);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	}
 
@@ -27,5 +28,20 @@ namespace Demo
 	void Renderer::DrawElements(IndexBuffer* indexBuffer, unsigned int startOffset)
 	{
 		glDrawElements(GL_TRIANGLES, indexBuffer->GetCount(), GL_UNSIGNED_INT, (const void*) startOffset);
+	}
+
+	void Renderer::DrawArrays(unsigned int vertexCount, unsigned int startOffset)
+	{
+		glDrawArrays(GL_TRIANGLES, startOffset, vertexCount);
+	}
+
+	void Renderer::EnableDepthTest()
+	{
+		glEnable(GL_DEPTH_TEST);
+	}
+
+	void Renderer::EnableStencilTest()
+	{
+		glEnable(GL_STENCIL_TEST);
 	}
 }

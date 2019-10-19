@@ -13,7 +13,8 @@ namespace Demo
 			 0.5f, -0.5f, 0.0f, 0.2f, 0.3f, 0.8f, 1.0f,
 			 0.0f,  0.5f, 0.0f, 0.8f, 0.8f, 0.2f, 1.0f
 		};
-		VertexBuffer* vertexBuffer = new VertexBuffer(vertices, sizeof(vertices));
+		unsigned int vertexLength = 7;
+		VertexBuffer* vertexBuffer = new VertexBuffer(vertices, sizeof(vertices), vertexLength);
 		vertexBuffer->SetLayout({
 			{ GLSLDataType::Vec3, "in_position" },
 			{ GLSLDataType::Vec4, "in_color" }

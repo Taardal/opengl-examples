@@ -5,7 +5,7 @@
 namespace Demo
 {
 	IndexBuffer::IndexBuffer(unsigned int* indices, unsigned int size)
-		: count(size / sizeof(unsigned int))
+		: id(0), count(size / sizeof(unsigned int))
 	{
 		glCreateBuffers(1, &id);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, id);

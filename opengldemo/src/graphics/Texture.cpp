@@ -5,10 +5,10 @@
 
 namespace Demo
 {
-	Texture::Texture(const std::string& filepath)
+	Texture::Texture(const std::string& filepath, bool flippedVertically)
 		: id(0), target(GL_TEXTURE_2D)
 	{
-		const Image& image = Load(filepath);
+		const Image& image = Load(filepath, flippedVertically);
 		Init(image);
 		Free(image);
 	}
@@ -29,9 +29,9 @@ namespace Demo
 		glBindTexture(target, 0);
 	}
 
-	Image Texture::Load(const std::string& filepath)
+	Image Texture::Load(const std::string& filepath, bool flippedVertically)
 	{
-		stbi_set_flip_vertically_on_load(1);
+		stbi_set_flip_vertically_on_load(flippedVertically ? 1 : 0);
 		int width = 0;
 		int height = 0;
 		int channels = 0;

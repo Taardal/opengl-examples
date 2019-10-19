@@ -106,6 +106,7 @@
     <ClCompile Include="src\graphics\VertexBuffer.cpp" />
     <ClCompile Include="src\graphics\VertexBufferLayout.cpp" />
     <ClCompile Include="src\input\InputPoller.cpp" />
+    <ClCompile Include="src\layers\DepthAndStencilBufferLayer.cpp" />
     <ClCompile Include="src\layers\ModelViewProjectionLayer.cpp" />
     <ClCompile Include="src\layers\TextureLayer.cpp" />
     <ClCompile Include="src\layers\TriangleLayer.cpp" />
@@ -168,6 +169,7 @@
     <ClInclude Include="src\input\InputPoller.h" />
     <ClInclude Include="src\input\KeyCodes.h" />
     <ClInclude Include="src\input\MouseButtonCodes.h" />
+    <ClInclude Include="src\layers\DepthAndStencilBufferLayer.h" />
     <ClInclude Include="src\layers\ModelViewProjectionLayer.h" />
     <ClInclude Include="src\layers\TextureLayer.h" />
     <ClInclude Include="src\layers\TriangleLayer.h" />

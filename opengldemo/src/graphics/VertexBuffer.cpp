@@ -4,8 +4,8 @@
 
 namespace Demo
 {
-	VertexBuffer::VertexBuffer(float* vertices, unsigned int size)
-		: id(0), layout{}
+	VertexBuffer::VertexBuffer(float* vertices, unsigned int size, unsigned int vertexLength)
+		: id(0), count(size / sizeof(unsigned int) / vertexLength), layout{}
 	{
 		glCreateBuffers(1, &id);
 		glBindBuffer(GL_ARRAY_BUFFER, id);
@@ -25,6 +25,11 @@ namespace Demo
 	void VertexBuffer::Unbind() const
 	{
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
+	}
+
+	unsigned int VertexBuffer::GetCount() const
+	{
+		return count;
 	}
 
 	const VertexBufferLayout& VertexBuffer::GetLayout() const

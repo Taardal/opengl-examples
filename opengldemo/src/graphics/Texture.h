@@ -20,14 +20,14 @@ namespace Demo
 		unsigned int target;
 
 	public:
-		Texture(const std::string& filepath);
+		Texture(const std::string& filepath, bool flippedVertically);
 		~Texture();
 
 		void Bind(unsigned int textureUnit = 0) const;
 		void Unbind() const;
 
 	private:
-		Image Load(const std::string& filepath);
+		Image Load(const std::string& filepath, bool flippedVertically);
 		void Init(const Image& image);
 		void Free(const Image& image);
 	};

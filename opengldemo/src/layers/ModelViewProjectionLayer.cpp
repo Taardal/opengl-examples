@@ -15,7 +15,8 @@ namespace Demo
 			 0.5f,  0.5f, 0.0f, 0.8f, 0.8f, 0.2f, 1.0f, 1.0f, 1.0f,
 			-0.5f,  0.5f, 0.0f, 0.8f, 0.8f, 0.2f, 1.0f, 0.0f, 1.0f
 		};
-		VertexBuffer* vertexBuffer = new VertexBuffer(vertices, sizeof(vertices));
+		unsigned int vertexLength = 9;
+		VertexBuffer* vertexBuffer = new VertexBuffer(vertices, sizeof(vertices), vertexLength);
 		vertexBuffer->SetLayout({
 			{ GLSLDataType::Vec3, "in_position" },
 			{ GLSLDataType::Vec4, "in_color" },
@@ -75,8 +76,9 @@ namespace Demo
 		)";
 		shader = new Shader(vertexSource, fragmentSource);
 
-		kittenTexture = new Texture("assets/kitten.png");
-		puppyTexture = new Texture("assets/puppy.png");
+		bool flippedVertically = true;
+		kittenTexture = new Texture("assets/kitten.png", flippedVertically);
+		puppyTexture = new Texture("assets/puppy.png", flippedVertically);
 	}
 
 	ModelViewProjectionLayer::~ModelViewProjectionLayer()

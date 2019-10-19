@@ -1,9 +1,5 @@
 #include "pch.h"
 #include "Application.h"
-#include "layers/TriangleLayer.h"
-#include "layers/TextureLayer.h"
-#include "layers/ModelViewProjectionLayer.h"
-#include "layers/ImGuiLayer.h"
 #include "events/KeyEvent.h"
 #include "events/MouseEvent.h"
 
@@ -12,12 +8,11 @@ namespace Demo
 	Application::Application()
 		: running(false)
 	{
-		window = new Window("OpenGL Demo", 640, 480);
+		window = new Window("OpenGL Demo", 1024, 720);
 		window->SetEventListener(BIND_FUNCTION(Application::OnEvent));
 		renderer = new Renderer();
 		imGuiRenderer = new ImGuiRenderer();
 		inputPoller = new InputPoller();
-		layerStack.PushLayer(new ModelViewProjectionLayer());
 		LOG_TRACE(TAG, "Created");
 	}
 
@@ -28,6 +23,11 @@ namespace Demo
 		delete renderer;
 		delete window;
 		LOG_TRACE(TAG, "Destroyed");
+	}
+
+	void Application::PushLayer(Layer* layer)
+	{
+		layerStack.PushLayer(layer);
 	}
 
 	void Application::Run()

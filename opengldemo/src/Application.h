@@ -19,6 +19,7 @@ namespace Demo
 		Application();
 		~Application();
 
+		void PushLayer(Layer* layer);
 		void Run();
 		void OnEvent(const Event& event);
 
