@@ -4,3 +4,4 @@ bin-int/
 *.vcxproj.user
 imgui.ini
 imgui_log.txt
+.vscode

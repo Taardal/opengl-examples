@@ -2,8 +2,8 @@
 #include "Application.h"
 #include "layers/TriangleLayer.h"
 #include "layers/TextureLayer.h"
-#include "layers/ModelViewProjectionLayer.h"
-#include "layers/DepthAndStencilBufferLayer.h"
+#include "layers/Texture3DLayer.h"
+#include "layers/TexturedCubeLayer.h"
 
 using namespace Demo;
 
@@ -13,8 +13,8 @@ int main()
 	Application* application = new Application();
 	application->PushLayer(new TriangleLayer());
 	//application->PushLayer(new TextureLayer());
-	//application->PushLayer(new ModelViewProjectionLayer());
-	//application->PushLayer(new DepthAndStencilBufferLayer());
+	//application->PushLayer(new Texture3DLayer());
+	//application->PushLayer(new TexturedCubeLayer());
 	application->Run();
 	delete application;
 	std::cin.get();

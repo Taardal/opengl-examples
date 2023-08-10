@@ -7,7 +7,7 @@
 
 namespace Demo
 {
-	class DepthAndStencilBufferLayer : public Layer
+	class Texture3DLayer : public Layer
 	{
 	private:
 		VertexArray* vertexArray;
@@ -17,8 +17,8 @@ namespace Demo
 		std::chrono::steady_clock::time_point startTime;
 
 	public:
-		DepthAndStencilBufferLayer();
-		~DepthAndStencilBufferLayer();
+		Texture3DLayer();
+		~Texture3DLayer();
 
 		virtual void OnAttach() override;
 		virtual void OnDetach() override;

@@ -19,7 +19,7 @@
     <thead>
         <tr>
             <th>3D Texture</th>
-            <th>3D Textured Cube</th>
+            <th>Textured Cube</th>
         </tr>
     </thead>
     <tbody>
@@ -57,8 +57,8 @@ The app requires Windows and Visual Studio to run.
 ```cpp
 application->PushLayer(new TriangleLayer());
 //application->PushLayer(new TextureLayer());
-//application->PushLayer(new 3DTextureLayer());
-//application->PushLayer(new 3DTexturedCubeLayer());
+//application->PushLayer(new Texture3DLayer());
+//application->PushLayer(new TexturedCubeLayer());
 ```
 
 # Resources&nbsp;:books:

@@ -1,11 +1,11 @@
 #include "pch.h"
-#include "DepthAndStencilBufferLayer.h"
+#include "TexturedCubeLayer.h"
 #include <glm/gtc/matrix_transform.hpp>
 
 namespace Demo
 {
-	DepthAndStencilBufferLayer::DepthAndStencilBufferLayer()
-		: Layer(TO_STRING(DepthAndStencilBufferLayer))
+	TexturedCubeLayer::TexturedCubeLayer()
+		: Layer(TO_STRING(TexturedCubeLayer))
 	{
 		vertexArray = new VertexArray();
 
@@ -119,7 +119,7 @@ namespace Demo
 		puppyTexture = new Texture("assets/puppy.png", flippedVertically);
 	}
 
-	DepthAndStencilBufferLayer::~DepthAndStencilBufferLayer()
+	TexturedCubeLayer::~TexturedCubeLayer()
 	{
 		delete puppyTexture;
 		delete kittenTexture;
@@ -127,12 +127,12 @@ namespace Demo
 		delete vertexArray;
 	}
 	
-	void DepthAndStencilBufferLayer::OnAttach()
+	void TexturedCubeLayer::OnAttach()
 	{
 		startTime = std::chrono::high_resolution_clock::now();
 	}
 
-	void DepthAndStencilBufferLayer::OnDetach()
+	void TexturedCubeLayer::OnDetach()
 	{
 		puppyTexture->Unbind();
 		kittenTexture->Unbind();
@@ -140,11 +140,11 @@ namespace Demo
 		vertexArray->Unbind();
 	}
 
-	void DepthAndStencilBufferLayer::OnUpdate()
+	void TexturedCubeLayer::OnUpdate()
 	{
 	}
 
-	void DepthAndStencilBufferLayer::OnRender(Renderer* renderer)
+	void TexturedCubeLayer::OnRender(Renderer* renderer)
 	{
 		vertexArray->Bind();
 		shader->Bind();
@@ -170,17 +170,17 @@ namespace Demo
 		}
 	}
 
-	void DepthAndStencilBufferLayer::OnImGuiRender()
+	void TexturedCubeLayer::OnImGuiRender()
 	{
 
 	}
 
-	void DepthAndStencilBufferLayer::OnEvent(const Event& event)
+	void TexturedCubeLayer::OnEvent(const Event& event)
 	{
 
 	}
 
-	const glm::mat4& DepthAndStencilBufferLayer::GetModelMatrix()
+	const glm::mat4& TexturedCubeLayer::GetModelMatrix()
 	{
 		auto currentTime = std::chrono::high_resolution_clock::now();
 		float elapsedTime = std::chrono::duration_cast<std::chrono::duration<float>>(currentTime - startTime).count();
@@ -189,7 +189,7 @@ namespace Demo
 		return glm::rotate(glm::mat4(1.0f), angle, axis);
 	}
 
-	const glm::mat4& DepthAndStencilBufferLayer::GetViewMatrix()
+	const glm::mat4& TexturedCubeLayer::GetViewMatrix()
 	{
 		glm::vec3 cameraPosition = glm::vec3(1.2f, 1.2f, 1.2f);
 		glm::vec3 center = glm::vec3(0.0f, 0.0f, 0.0f);
@@ -197,7 +197,7 @@ namespace Demo
 		return glm::lookAt(cameraPosition, center, upAxis);
 	}
 
-	const glm::mat4& DepthAndStencilBufferLayer::GetProjectionMatrix()
+	const glm::mat4& TexturedCubeLayer::GetProjectionMatrix()
 	{
 		constexpr float fieldOfView = glm::radians(45.0f);
 		float aspectRatio = 800.0f / 600.0f;

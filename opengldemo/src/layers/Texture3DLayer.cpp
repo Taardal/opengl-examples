@@ -1,11 +1,11 @@
 #include "pch.h"
-#include "ModelViewProjectionLayer.h"
+#include "Texture3DLayer.h"
 #include <glm/gtc/matrix_transform.hpp>
 
 namespace Demo
 {
-	ModelViewProjectionLayer::ModelViewProjectionLayer()
-		: Layer(TO_STRING(ModelViewProjectionLayer))
+	Texture3DLayer::Texture3DLayer()
+		: Layer(TO_STRING(Texture3DLayer))
 	{
 		vertexArray = new VertexArray();
 
@@ -81,7 +81,7 @@ namespace Demo
 		puppyTexture = new Texture("assets/puppy.png", flippedVertically);
 	}
 
-	ModelViewProjectionLayer::~ModelViewProjectionLayer()
+	Texture3DLayer::~Texture3DLayer()
 	{
 		delete puppyTexture;
 		delete kittenTexture;
@@ -89,12 +89,12 @@ namespace Demo
 		delete vertexArray;
 	}
 
-	void ModelViewProjectionLayer::OnAttach()
+	void Texture3DLayer::OnAttach()
 	{
 		startTime = std::chrono::high_resolution_clock::now();
 	}
 
-	void ModelViewProjectionLayer::OnDetach()
+	void Texture3DLayer::OnDetach()
 	{
 		puppyTexture->Unbind();
 		kittenTexture->Unbind();
@@ -102,11 +102,11 @@ namespace Demo
 		vertexArray->Unbind();
 	}
 
-	void ModelViewProjectionLayer::OnUpdate()
+	void Texture3DLayer::OnUpdate()
 	{
 	}
 
-	void ModelViewProjectionLayer::OnRender(Renderer* renderer)
+	void Texture3DLayer::OnRender(Renderer* renderer)
 	{
 		vertexArray->Bind();
 		shader->Bind();
@@ -126,15 +126,15 @@ namespace Demo
 		renderer->DrawElements(vertexArray->GetIndexBuffer());
 	}
 
-	void ModelViewProjectionLayer::OnImGuiRender()
+	void Texture3DLayer::OnImGuiRender()
 	{
 	}
 
-	void ModelViewProjectionLayer::OnEvent(const Event& event)
+	void Texture3DLayer::OnEvent(const Event& event)
 	{
 	}
 
-	const glm::mat4& ModelViewProjectionLayer::GetModelMatrix()
+	const glm::mat4& Texture3DLayer::GetModelMatrix()
 	{
 		auto currentTime = std::chrono::high_resolution_clock::now();
 		float elapsedTime = std::chrono::duration_cast<std::chrono::duration<float>>(currentTime - startTime).count();
@@ -143,7 +143,7 @@ namespace Demo
 		return glm::rotate(glm::mat4(1.0f), angle, axis);
 	}
 
-	const glm::mat4& ModelViewProjectionLayer::GetViewMatrix()
+	const glm::mat4& Texture3DLayer::GetViewMatrix()
 	{
 		glm::vec3 cameraPosition = glm::vec3(1.2f, 1.2f, 1.2f);
 		glm::vec3 center = glm::vec3(0.0f, 0.0f, 0.0f);
@@ -151,7 +151,7 @@ namespace Demo
 		return glm::lookAt(cameraPosition, center, upAxis);
 	}
 
-	const glm::mat4& ModelViewProjectionLayer::GetProjectionMatrix()
+	const glm::mat4& Texture3DLayer::GetProjectionMatrix()
 	{
 		constexpr float fieldOfView = glm::radians(45.0f);
 		float aspectRatio = 800.0f / 600.0f;

@@ -111,10 +111,10 @@
     <ClCompile Include="vendor\stb_image\stb_image.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\layers\ModelViewProjectionLayer.cpp">
+    <ClCompile Include="src\layers\Texture3DLayer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\layers\DepthAndStencilBufferLayer.cpp">
+    <ClCompile Include="src\layers\TexturedCubeLayer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -227,10 +227,10 @@
     <ClInclude Include="vendor\stb_image\stb_image.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\layers\ModelViewProjectionLayer.h">
+    <ClInclude Include="src\layers\Texture3DLayer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\layers\DepthAndStencilBufferLayer.h">
+    <ClInclude Include="src\layers\TexturedCubeLayer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

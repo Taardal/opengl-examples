@@ -7,7 +7,7 @@
 
 namespace Demo
 {
-	class ModelViewProjectionLayer : public Layer
+	class TexturedCubeLayer : public Layer
 	{
 	private:
 		VertexArray* vertexArray;
@@ -17,8 +17,8 @@ namespace Demo
 		std::chrono::steady_clock::time_point startTime;
 
 	public:
-		ModelViewProjectionLayer();
-		~ModelViewProjectionLayer();
+		TexturedCubeLayer();
+		~TexturedCubeLayer();
 
 		virtual void OnAttach() override;
 		virtual void OnDetach() override;
