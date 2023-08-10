@@ -11,7 +11,10 @@ int main()
 {
 	Log::SetLevel(LogLevel::Trace);
 	Application* application = new Application();
-	application->PushLayer(new DepthAndStencilBufferLayer());
+	application->PushLayer(new TriangleLayer());
+	//application->PushLayer(new TextureLayer());
+	//application->PushLayer(new ModelViewProjectionLayer());
+	//application->PushLayer(new DepthAndStencilBufferLayer());
 	application->Run();
 	delete application;
 	std::cin.get();

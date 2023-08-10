@@ -8,6 +8,7 @@ namespace Demo
 	{
 		glClearColor(0.1f, 0.1f, 0.1f, 1);
 		EnableDepthTest();
+		EnableStencilTest();
 		LOG_TRACE(TAG, "Created");
 	}
 

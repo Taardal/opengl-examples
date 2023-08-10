@@ -184,7 +184,7 @@ namespace Demo
 	{
 		auto currentTime = std::chrono::high_resolution_clock::now();
 		float elapsedTime = std::chrono::duration_cast<std::chrono::duration<float>>(currentTime - startTime).count();
-		float angle = elapsedTime * glm::radians(180.0f);
+		float angle = elapsedTime * glm::radians(90.0f);
 		glm::vec3 axis = glm::vec3(0.0f, 0.0f, 1.0f);
 		return glm::rotate(glm::mat4(1.0f), angle, axis);
 	}
