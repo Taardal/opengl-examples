@@ -1,34 +1,10 @@
 # OpenGL Examples
 
 <div float="left">
-  <table>
-    <thead>
-        <tr>
-            <th>Triangle</th>
-            <th>Texture</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td><img src="./img/triangle.png" width="400" /></td>
-            <td><img src="./img/texture.png" width="400" /></td>
-        </tr>
-    </tbody>
-</table>
-<table>
-    <thead>
-        <tr>
-            <th>3D Texture</th>
-            <th>Textured Cube</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td><img src="./img/3d.gif" width="400" /></td>
-            <td><img src="./img/3d_cube.gif" width="400" /></td>
-        </tr>
-    </tbody>
-</table>
+  <img src="./img/triangle.png" width="400" />
+  <img src="./img/texture.png" width="400" />
+  <img src="./img/3d.gif" width="400" />
+  <img src="./img/3d_cube.gif" width="400" />
 </div>
 
 # Description
